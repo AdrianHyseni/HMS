@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
+   <top>
+      <HBox prefHeight="100.0" prefWidth="200.0" styleClass="header" BorderPane.alignment="CENTER">
+         <children>
+            <HBox prefHeight="100.0" prefWidth="200.0" styleClass="header-section">
+               <children>
+                  <Button mnemonicParsing="false" styleClass="hamburger-btn" />
+                  <Label id="test" alignment="CENTER_RIGHT" contentDisplay="RIGHT" styleClass="title-label" text="Merlin Hotel" />
+               </children>
+            </HBox>
+            <Button mnemonicParsing="false" styleClass="header-btn" text="Add Room" />
+            <Button mnemonicParsing="false" styleClass="header-btn" text="Add Apartment" />
+            <Button mnemonicParsing="false" styleClass="header-btn" text="Add Offerts" />
+         </children>
+      </HBox>
+   </top>
+   <left>
+      <VBox prefHeight="200.0" prefWidth="100.0" styleClass="left-menu" BorderPane.alignment="CENTER">
+         <children>
+            <HBox prefHeight="100.0" prefWidth="200.0" styleClass="profile-section">
+               <children>
+                  <Label styleClass="logo" />
+                  <VBox id="profile-section" prefHeight="200.0" prefWidth="100.0">
+                     <children>
+                        <Label styleClass="username" text="Username" />
+                        <Button mnemonicParsing="false" styleClass="profile-btn" text="Profile" />
+                        <Button layoutX="10.0" layoutY="10.0" mnemonicParsing="false" styleClass="profile-btn" text="Logout" />
+                     </children>
+                  </VBox>
+               </children>
+            </HBox>
+            <Button mnemonicParsing="false" styleClass="menu-btn" text="Rooms" />
+            <Button layoutX="10.0" layoutY="10.0" mnemonicParsing="false" styleClass="menu-btn" text="Appartments" />
+            <Button layoutX="10.0" layoutY="10.0" mnemonicParsing="false" styleClass="menu-btn" text="Reservations" />
+            <Button layoutX="10.0" layoutY="10.0" mnemonicParsing="false" styleClass="menu-btn" text="Costs" />
+            <Button layoutX="10.0" layoutY="35.0" mnemonicParsing="false" styleClass="menu-btn" text="Bills" />
+            <Button layoutX="10.0" layoutY="60.0" mnemonicParsing="false" styleClass="menu-btn" text="Settings" />
+         </children>
+      </VBox>
+   </left>
+   <bottom>
+      <Pane prefHeight="80.0" prefWidth="200.0" styleClass="footer" BorderPane.alignment="CENTER" />
+   </bottom>
+   <center>
+      <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
+         <children>
+            <HBox prefHeight="100.0" prefWidth="200.0" styleClass="dashboard-title-section">
+               <children>
+                  <Label id="dashboard-label" text="Dashboard" />
+               </children>
+            </HBox>
+            <GridPane hgap="20.0" styleClass="dash-menu">
+              <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+               <children>
+                  <VBox styleClass="dash-card">
+                     <children>
+                        <Label id="card-title" text="Rooms" />
+                        <ImageView fitHeight="130.0" fitWidth="130.0" pickOnBounds="true" preserveRatio="true" styleClass="img-view">
+                           <image>
+                              <Image url="@assets/room.jpg" />
+                           </image>
+                        </ImageView>
+                        <Button id="card-btn" mnemonicParsing="false" text="Go To Rooms" />
+                     </children>
+                  </VBox>
+                  <VBox layoutX="10.0" layoutY="-63.0" prefHeight="200.0" prefWidth="100.0" styleClass="dash-card" GridPane.columnIndex="1">
+                     <children>
+                        <Label id="card-title" text="Apartments" />
+                        <ImageView fitHeight="130.0" fitWidth="130.0" pickOnBounds="true" preserveRatio="true" styleClass="img-view">
+                           <image>
+                              <Image url="@assets/apartment.jpg" />
+                           </image>
+                        </ImageView>
+                        <Button id="card-btn" mnemonicParsing="false" text="Go To Apartments" />
+                     </children>
+                  </VBox>
+                  <VBox layoutX="10.0" layoutY="-63.0" prefHeight="200.0" prefWidth="100.0" styleClass="dash-card" GridPane.columnIndex="2">
+                     <children>
+                        <Label id="card-title" text="Reservations" />
+                        <ImageView fitHeight="130.0" fitWidth="130.0" pickOnBounds="true" preserveRatio="true" styleClass="img-view">
+                           <image>
+                              <Image url="@assets/booking.jpg" />
+                           </image>
+                        </ImageView>
+                        <Button id="card-btn" mnemonicParsing="false" text="Go To Reservations" />
+                     </children>
+                  </VBox>
+                  <VBox layoutX="10.0" layoutY="-63.0" prefHeight="200.0" prefWidth="100.0" styleClass="dash-card" GridPane.columnIndex="2" GridPane.rowIndex="1">
+                     <children>
+                        <Label id="card-title" text="Costs" />
+                        <ImageView fitHeight="130.0" fitWidth="130.0" pickOnBounds="true" preserveRatio="true" styleClass="img-view">
+                           <image>
+                              <Image url="@assets/calc.jpg" />
+                           </image>
+                        </ImageView>
+                        <Button id="card-btn" mnemonicParsing="false" text="Go To Costs" />
+                     </children>
+                  </VBox>
+                  <VBox layoutX="10.0" layoutY="-63.0" prefHeight="200.0" prefWidth="100.0" styleClass="dash-card" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                     <children>
+                        <Label id="card-title" text="Bills" />
+                        <ImageView fitHeight="130.0" fitWidth="130.0" pickOnBounds="true" preserveRatio="true" styleClass="img-view">
+                           <image>
+                              <Image url="@assets/bills.jpg" />
+                           </image>
+                        </ImageView>
+                        <Button id="card-btn" mnemonicParsing="false" text="Go To Bills" />
+                     </children>
+                  </VBox>
+                  <VBox layoutX="10.0" layoutY="-63.0" prefHeight="200.0" prefWidth="100.0" styleClass="dash-card" GridPane.columnIndex="0" GridPane.rowIndex="1">
+                     <children>
+                        <Label id="card-title" text="Settings" />
+                        <ImageView fitHeight="130.0" fitWidth="130.0" pickOnBounds="true" preserveRatio="true" styleClass="img-view">
+                           <image>
+                              <Image url="@assets/settings.jpg" />
+                           </image>
+                        </ImageView>
+                        <Button id="card-btn" mnemonicParsing="false" text="Go To Settings" />
+                     </children>
+                  </VBox>
+               </children>
+            </GridPane>
+         </children>
+      </VBox>
+   </center>
+</BorderPane>
