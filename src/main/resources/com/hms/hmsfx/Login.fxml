@@ -10,7 +10,7 @@
             <Label id="login-label" text="Login" />
             <TextField promptText="Usernam" styleClass="login-input" />
             <PasswordField promptText="Password" styleClass="login-input" />
-            <Button mnemonicParsing="false" styleClass="login-btn" text="Login" />
+            <Button fx:id="loginBtn" mnemonicParsing="false" styleClass="login-btn" text="Login" />
          </children>
       </VBox>
    </center>
