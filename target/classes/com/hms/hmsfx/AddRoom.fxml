@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
+   <top>
+      <HBox prefHeight="100.0" prefWidth="200.0" styleClass="header" BorderPane.alignment="CENTER">
+         <children>
+            <HBox prefHeight="100.0" prefWidth="200.0" styleClass="header-section">
+               <children>
+                  <Button mnemonicParsing="false" styleClass="hamburger-btn" />
+                  <Label id="test" alignment="CENTER_RIGHT" contentDisplay="RIGHT" styleClass="title-label" text="Merlin Hotel" />
+               </children>
+            </HBox>
+            <Button mnemonicParsing="false" styleClass="header-btn" text="Add Room" />
+            <Button mnemonicParsing="false" styleClass="header-btn" text="Add Apartment" />
+            <Button mnemonicParsing="false" styleClass="header-btn" text="Add Offerts" />
+         </children>
+      </HBox>
+   </top>
+   <left>
+      <VBox prefHeight="200.0" prefWidth="100.0" styleClass="left-menu" BorderPane.alignment="CENTER">
+         <children>
+            <HBox prefHeight="100.0" prefWidth="200.0" styleClass="profile-section">
+               <children>
+                  <Label styleClass="logo" />
+                  <VBox id="profile-section" prefHeight="200.0" prefWidth="100.0">
+                     <children>
+                        <Label styleClass="username" text="Username" />
+                        <Button mnemonicParsing="false" styleClass="profile-btn" text="Profile" />
+                        <Button layoutX="10.0" layoutY="10.0" mnemonicParsing="false" styleClass="profile-btn" text="Logout" />
+                     </children>
+                  </VBox>
+               </children>
+            </HBox>
+            <Button mnemonicParsing="false" styleClass="menu-btn" text="Rooms" />
+            <Button layoutX="10.0" layoutY="10.0" mnemonicParsing="false" styleClass="menu-btn" text="Appartments" />
+            <Button layoutX="10.0" layoutY="10.0" mnemonicParsing="false" styleClass="menu-btn" text="Reservations" />
+            <Button layoutX="10.0" layoutY="10.0" mnemonicParsing="false" styleClass="menu-btn" text="Costs" />
+            <Button layoutX="10.0" layoutY="35.0" mnemonicParsing="false" styleClass="menu-btn" text="Bills" />
+            <Button layoutX="10.0" layoutY="60.0" mnemonicParsing="false" styleClass="menu-btn" text="Settings" />
+         </children>
+      </VBox>
+   </left>
+   <bottom>
+      <Pane prefHeight="80.0" prefWidth="200.0" styleClass="footer" BorderPane.alignment="CENTER" />
+   </bottom>
+   <center>
+      <VBox prefHeight="200.0" prefWidth="100.0" styleClass="add-room-center" BorderPane.alignment="CENTER">
+         <children>
+            <HBox prefHeight="100.0" prefWidth="200.0" styleClass="room-title-section">
+               <children>
+                  <Label id="room-label" text="Rooms" />
+               </children>
+            </HBox>
+            <HBox prefHeight="100.0" prefWidth="200.0" styleClass="add-room-section">
+               <children>
+                  <VBox id="left-side" prefHeight="200.0" prefWidth="100.0">
+                     <children>
+                        <Label id="room-label-1" text="Label" />
+                        <TextField id="room-input" />
+                        <Label id="room-label-1" layoutX="10.0" layoutY="10.0" text="Label" />
+                        <TextField id="room-input" layoutX="10.0" layoutY="27.0" />
+                        <Label id="room-label-1" layoutX="10.0" layoutY="52.0" text="Label" />
+                        <TextField id="room-input" layoutX="10.0" layoutY="69.0" />
+                        <Label id="room-label-1" layoutX="10.0" layoutY="94.0" text="Label" />
+                        <TextField id="room-input" layoutX="10.0" layoutY="111.0" />
+                        <Label id="room-label-1" text="Label" />
+                        <TextArea prefHeight="200.0" prefWidth="200.0" styleClass="text-area-room" />
+                        <HBox id="room-add-section" prefHeight="100.0" prefWidth="200.0">
+                           <children>
+                              <Button id="room-btn-1" mnemonicParsing="false" text="Button" />
+                              <Button id="room-btn-2" mnemonicParsing="false" text="Button" />
+                           </children>
+                        </HBox>
+                     </children>
+                  </VBox>
+                  <VBox id="right-side" layoutX="10.0" layoutY="10.0" prefHeight="200.0" prefWidth="100.0">
+                     <children>
+                        <HBox prefHeight="100.0" prefWidth="200.0" styleClass="search-section">
+                           <children>
+                              <TextField id="search-room" />
+                              <Button id="room-btn-1" mnemonicParsing="false" text="Button" />
+                              <Button id="room-btn-2" mnemonicParsing="false" text="Button" />
+                           </children>
+                        </HBox>
+                        <TableView id="room-table" prefHeight="200.0" prefWidth="200.0">
+                          <columns>
+                            <TableColumn prefWidth="75.0" text="C1" />
+                            <TableColumn prefWidth="75.0" text="C2" />
+                          </columns>
+                        </TableView>
+                     </children>
+                  </VBox>
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+   </center>
+</BorderPane>
