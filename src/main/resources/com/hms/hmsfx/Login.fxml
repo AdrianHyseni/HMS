@@ -8,9 +8,9 @@
       <VBox prefHeight="200.0" prefWidth="100.0" styleClass="login-stack" BorderPane.alignment="CENTER">
          <children>
             <Label id="login-label" text="Login" />
-            <TextField promptText="Usernam" styleClass="login-input" />
-            <PasswordField promptText="Password" styleClass="login-input" />
-            <Button fx:id="loginBtn" mnemonicParsing="false" styleClass="login-btn" text="Login" />
+            <TextField fx:id="usernameF" promptText="Usernam" styleClass="login-input" />
+            <PasswordField fx:id="passwordF" promptText="Password" styleClass="login-input" />
+            <Button fx:id="loginBtn" mnemonicParsing="false" onAction="#loginBtn" styleClass="login-btn" text="Login" />
          </children>
       </VBox>
    </center>
