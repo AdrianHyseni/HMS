@@ -10,6 +10,14 @@ module com.hms.hmsfx {
     requires org.kordamp.bootstrapfx.core;
     requires eu.hansolo.tilesfx;
 
+    requires java.sql;
+
+
     opens com.hms.hmsfx to javafx.fxml;
     exports com.hms.hmsfx;
+
+
+
+
+
 }
