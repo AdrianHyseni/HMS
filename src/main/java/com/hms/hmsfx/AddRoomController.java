@@ -2,6 +2,7 @@ package com.hms.hmsfx;
 
 import com.hms.hmsfx.data.RoomData;
 import com.hms.hmsfx.data.SystemData;
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
@@ -58,7 +59,8 @@ public class AddRoomController implements Initializable {
     private CheckBox status;
     @FXML
     private TextArea descriptionTa;
-
+    @FXML
+    private Button deleteBtn;
     @FXML
     private Button showAllBtn;
 
@@ -123,15 +125,19 @@ public class AddRoomController implements Initializable {
             @Override
             public void handle(ActionEvent event) {
                 try {
-                    for ( int i = 0; i<roomTable.getItems().size(); i++) {
-                        roomTable.getItems().clear();
-                    }
-                    showData();
+                    refresh();
                 }catch (Exception e){
                     e.printStackTrace();
                 }
             }
         });
+        deleteBtn.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                deleteData();
+            }
+        });
+
 
 
 
@@ -255,7 +261,7 @@ public class AddRoomController implements Initializable {
 
 
     }
-    private void getData() {
+    public void getData() {
         try{
             String query = "SELECT * FROM ROOMS";
             preparedStatement = con.prepareStatement(query);
@@ -278,7 +284,28 @@ public class AddRoomController implements Initializable {
         }
 
     }
+    public void deleteData(){
+        RoomData room;
+      try{
+            int selectedIndex = roomTable.getSelectionModel().getSelectedIndex();
+            room = roomTable.getSelectionModel().getSelectedItem();
+            int tempItemId = room.getRoomID();
+            System.out.println(tempItemId);
+            String query = "DELETE FROM rooms WHERE id=?";
+            preparedStatement = con.prepareStatement(query);
+            preparedStatement.setInt(1,tempItemId);
+            preparedStatement.execute();
+            refresh();
 
+
+      }catch (SQLException sqlException){
+           sqlException.printStackTrace();
+       }
+    }
+    public void refresh(){
+        roomData.clear();
+        filterData();
+    }
 
 
 
