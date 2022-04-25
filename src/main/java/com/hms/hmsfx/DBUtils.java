@@ -1,5 +1,6 @@
 package com.hms.hmsfx;
 
+import com.hms.hmsfx.data.SystemData;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -12,24 +13,33 @@ import java.io.IOException;
 import java.sql.*;
 
 
-public class DBUtils {
+public class DBUtils  {
 
+    public String getCss(){
+        String css = this.getClass().getResource("styles.css").toExternalForm();
+        return css;
+    }
+
+    // Function to change the scene
 public static void changeScene(ActionEvent event, String fxmlFile, String title, String username, String password){
     Parent root = null;
 
     if(username != null && password != null) {
         try {
             FXMLLoader loader = new FXMLLoader((DBUtils.class.getResource(fxmlFile)));
+            DBUtils d = new DBUtils();
             root = loader.load();
+            root.getStylesheets().add(d.getCss());
             DashboardController dashboardController = loader.getController();
             dashboardController.setUserInformation(username,password);
+
 
         } catch (IOException e ){
             e.printStackTrace();
         }
     }
     else {
-
+        System.out.println("Error");
     }
 
     Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
@@ -41,14 +51,14 @@ public static void changeScene(ActionEvent event, String fxmlFile, String title,
 }
 
 
-
-    public static void loginUser(ActionEvent event,String username, String password){
+//Login USER
+public static void loginUser(ActionEvent event,String username, String password){
         DatabaseConnection connection = new DatabaseConnection();
         Connection con = connection.getConnection();
         ResultSet resultSet = null;
         PreparedStatement preparedStatement = null;
 
-        String loginQuery = "SELECT name FROM USER WHERE username = ? AND password = ?";
+        String loginQuery = "SELECT username, password FROM user WHERE username = ? AND password = ?";
 
         try {
                 preparedStatement = con.prepareStatement(loginQuery);
@@ -70,7 +80,9 @@ public static void changeScene(ActionEvent event, String fxmlFile, String title,
                         String retrievedUsername = resultSet.getString("username");
 
                         if (retrievedPassword.equals(password)){
-                            changeScene(event, "com/hms/hmsfx/Dashboard.fxml","Dashboard", username,null);
+                            changeScene(event, "Dashboard.fxml","Dashboard", username,password);
+                            SystemData sd = new SystemData();
+                            sd.setUsername(username);
 
                         }else{
                             System.out.println("Password did not match");
@@ -115,5 +127,8 @@ public static void changeScene(ActionEvent event, String fxmlFile, String title,
 
     }
 
+    //Change normal scene
 
 }
+
+

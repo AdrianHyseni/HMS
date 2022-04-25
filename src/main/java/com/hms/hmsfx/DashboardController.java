@@ -1,5 +1,6 @@
 package com.hms.hmsfx;
 
+import com.hms.hmsfx.data.SystemData;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -38,21 +39,51 @@ public class DashboardController implements Initializable {
     private Button settingsBtn;
 
     @FXML
+    private Button settingsBtnSide;
+
+    @FXML
     private Button reservationBtn;
 
+    @FXML
+    private Button roomBtnSide;
 
+    @FXML
+    private Button homeBtn;
+
+    HMSFunctions hmsFunctions = new HMSFunctions();
+    SideBar s = new SideBar();
+    SystemData sd  = new SystemData();
 
 
 
 
 
     @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
-
-        logoutBtn.setOnAction(new EventHandler<ActionEvent>() {
+    public void initialize(URL url, ResourceBundle resourceBundle)  {
+        s.sideBar(profileBtn,logoutBtn,settingsBtnSide,roomBtnSide,homeBtn);
+        roomBtn.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                DBUtils.changeScene(event, "com/hms/hmsfx/Login.fxml", null, null,null);
+                try {
+                    hmsFunctions.goToRooms();
+                }
+                catch (Exception e){
+                    e.printStackTrace();
+                }
+            }
+        });
+
+
+        setUserInformation(sd.getUsername(),null);
+        settingsBtn.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                try {
+                    hmsFunctions.goToSettings();
+                }
+                catch (Exception e){
+                    e.printStackTrace();
+                }
             }
         });
 

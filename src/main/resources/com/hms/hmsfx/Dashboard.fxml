@@ -10,11 +10,10 @@
          <children>
             <HBox prefHeight="100.0" prefWidth="200.0" styleClass="header-section">
                <children>
-                  <Button mnemonicParsing="false" styleClass="hamburger-btn" />
+                  <Button fx:id="homeBtn" mnemonicParsing="false" styleClass="hamburger-btn" />
                   <Label id="test" alignment="CENTER_RIGHT" contentDisplay="RIGHT" styleClass="title-label" text="Merlin Hotel" />
                </children>
             </HBox>
-            <Button mnemonicParsing="false" styleClass="header-btn" text="Add Room" />
             <Button mnemonicParsing="false" styleClass="header-btn" text="Add Apartment" />
             <Button mnemonicParsing="false" styleClass="header-btn" text="Add Offerts" />
          </children>
@@ -35,12 +34,12 @@
                   </VBox>
                </children>
             </HBox>
-            <Button fx:id="roomBtn" mnemonicParsing="false" styleClass="menu-btn" text="Rooms" />
+            <Button fx:id="roomBtnSide" mnemonicParsing="false" styleClass="menu-btn" text="Rooms" />
             <Button fx:id="apartmentBtn" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" styleClass="menu-btn" text="Appartments" />
             <Button fx:id="reservationBtn" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" styleClass="menu-btn" text="Reservations" />
             <Button fx:id="costBtn" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" styleClass="menu-btn" text="Costs" />
             <Button fx:id="billBtn" layoutX="10.0" layoutY="35.0" mnemonicParsing="false" styleClass="menu-btn" text="Bills" />
-            <Button fx:id="settngsBtn" layoutX="10.0" layoutY="60.0" mnemonicParsing="false" styleClass="menu-btn" text="Settings" />
+            <Button fx:id="settingsBtnSide" layoutX="10.0" layoutY="60.0" mnemonicParsing="false" styleClass="menu-btn" text="Settings" />
          </children>
       </VBox>
    </left>
@@ -74,7 +73,7 @@
                               <Image url="@assets/room.jpg" />
                            </image>
                         </ImageView>
-                        <Button id="card-btn" mnemonicParsing="false" text="Go To Rooms" />
+                        <Button id="card-btn" fx:id="roomBtn" mnemonicParsing="false" text="Go To Rooms" />
                      </children>
                   </VBox>
                   <VBox layoutX="10.0" layoutY="-63.0" prefHeight="200.0" prefWidth="100.0" styleClass="dash-card" GridPane.columnIndex="1">
@@ -129,7 +128,7 @@
                               <Image url="@assets/settings.jpg" />
                            </image>
                         </ImageView>
-                        <Button id="card-btn" mnemonicParsing="false" text="Go To Settings" />
+                        <Button id="card-btn" fx:id="settingsBtn" mnemonicParsing="false" text="Go To Settings" />
                      </children>
                   </VBox>
                </children>

@@ -15,9 +15,8 @@ module com.hms.hmsfx {
 
     opens com.hms.hmsfx to javafx.fxml;
     exports com.hms.hmsfx;
-
-
-
+    exports com.hms.hmsfx.data;
+    opens com.hms.hmsfx.data to javafx.fxml;
 
 
 }

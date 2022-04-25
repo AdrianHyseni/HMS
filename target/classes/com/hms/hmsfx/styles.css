@@ -139,11 +139,22 @@
     -fx-pref-width: 30px;
     -fx-pref-height: 30px;
     -fx-background-radius: 100%;
-    -fx-background-image: url("./assets/menu.png");
+    -fx-background-image: url("./assets/home.png");
     -fx-background-size: contain;
     -fx-background-color:transparent;
 
 }
+.hamburger-btn:hover {
+    -fx-alignment: top-left;
+    -fx-pref-width: 30px;
+    -fx-pref-height: 30px;
+    -fx-background-radius: 100%;
+    -fx-background-image: url("./assets/home.png");
+    -fx-background-color: rgba(255, 255, 255, 0.5);
+    -fx-background-size: contain;
+
+}
+
 
 .header-btn {
     -fx-pref-width: 150px;
@@ -172,7 +183,19 @@
     -fx-font-size: 16px;
 
 }
+.menu-btn:hover {
+    -fx-pref-width: 290px;
+    -fx-pref-height: 30px ;
+    -fx-background-color: rgba(255, 255, 255, 0.5);
+    -fx-background-radius: 3px;
+    -fx-border-width: 1px;
+    -fx-text-fill: #fff;
+    -fx-padding: 13px;
+    -fx-border-insets: 10px;
+    -fx-background-insets: 10px;
+    -fx-font-size: 16px;
 
+}
 
 .logo {
     -fx-background-image: url("assets/logo.png");
@@ -186,6 +209,16 @@
     -fx-pref-width: 200px;
     -fx-pref-height: 30px ;
     -fx-background-color: rgba(0, 0, 0, 0.20);
+    -fx-background-radius: 3px;
+    -fx-border-width: 1px;
+    -fx-text-fill: #fff;
+    -fx-font-size: 16px;
+}
+
+.profile-btn:hover {
+    -fx-pref-width: 200px;
+    -fx-pref-height: 30px ;
+    -fx-background-color: rgba(255, 255, 255, 0.5);
     -fx-background-radius: 3px;
     -fx-border-width: 1px;
     -fx-text-fill: #fff;
@@ -329,6 +362,10 @@
     -fx-alignment: center;
     -fx-background-radius: 30px;
 }
+#room-checkbox-input{
+    -fx-text-fill: #fff;
+    -fx-alignment: center;
+}
 
 .text-area-room{
     -fx-pref-width: 90px;
@@ -371,7 +408,7 @@
 }
 
 #search-room {
-    -fx-pref-width: 400px;
+    -fx-pref-width: 250px;
     -fx-background-color:  rgba(255, 255, 255, 0.5);
     -fx-text-fill: rgba(5, 68, 94);
     -fx-alignment: center;
@@ -422,4 +459,96 @@
     -fx-background-insets: 10px;
     -fx-background-radius: 40px;
     -fx-font-size: 16px;
+}
+
+/* Profile */
+
+.center-profile {
+    -fx-background-image: url("assets/loginBG.png");
+
+}
+
+.profile-card {
+    -fx-background-color:   rgba(5, 68, 94,0.6);
+    -fx-text-fill: #fff;
+    -fx-alignment: center;
+    -fx-background-radius: 30px;
+    -fx-padding: 180px;
+    -fx-spacing: 10px;
+
+
+}
+
+#center-input-profile{
+    -fx-alignment: center;
+    -fx-pref-width: 200px;
+
+
+
+}
+
+.input1-profile {
+    -fx-background-color:  rgba(255, 255, 255, 0.8);
+    -fx-text-fill: rgba(5, 68, 94);
+    -fx-alignment: center;
+    -fx-background-radius: 30px;
+    -fx-hgap: 30px;
+
+}
+
+.input2-profile{
+    -fx-background-color:  rgba(255, 255, 255, 0.8);
+    -fx-text-fill: rgba(5, 68, 94);
+    -fx-alignment: center;
+    -fx-background-radius: 30px;
+    -fx-pref-height: 30px;
+}
+
+.credential1-profile {
+    -fx-spacing: 30px;
+}
+
+.profile-text{
+    -fx-text-fill: #fff;
+    -fx-font-size: 20px;
+}
+
+.logo-profile{
+    -fx-background-image: url("assets/logo.png");
+    -fx-font-size: 80px;
+    -fx-pref-width: 110px;
+    -fx-pref-height: 110px;
+    -fx-background-size: contain;
+    -fx-background-repeat: no-repeat;
+}
+
+.button-combo{
+    -fx-spacing: 30px;
+}
+
+.button1-profile{
+    -fx-text-fill: #fff;
+    -fx-background-color: rgba(5, 68, 94);
+    -fx-pref-width: 90px;
+    -fx-background-radius: 30px;
+    -fx-font-size: 16px;
+
+}
+
+.button2-profile{
+    -fx-text-fill: #fff;
+    -fx-background-color: #189AB4;
+    -fx-pref-width: 90px;
+    -fx-background-radius: 30px;
+    -fx-font-size: 16px;
+
+}
+
+#room-table {
+    -fx-pref-height: 500px;
+    -fx-font-size: 12px;
+}
+
+#room-table col {
+    -fx-pref-width: 80px;
 }
