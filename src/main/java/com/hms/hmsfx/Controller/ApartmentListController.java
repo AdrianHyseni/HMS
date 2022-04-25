@@ -1,9 +1,8 @@
 package com.hms.hmsfx.Controller;
 
 import com.hms.hmsfx.DatabaseConnection;
-import com.hms.hmsfx.HMSFunctions;
 import com.hms.hmsfx.SideBar;
-import com.hms.hmsfx.data.RoomData;
+import com.hms.hmsfx.data.ApartmentData;
 import com.hms.hmsfx.data.SystemData;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -23,9 +22,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.*;
 
-public class RoomListController implements Initializable {
+public class ApartmentListController implements Initializable {
 
-    ObservableList<RoomData> roomData =FXCollections.observableArrayList();
+    ObservableList<ApartmentData> apartmentData =FXCollections.observableArrayList();
     SystemData sd = new SystemData();
     DatabaseConnection connection = new DatabaseConnection();
     Connection con = connection.getConnection();
@@ -53,17 +52,19 @@ public class RoomListController implements Initializable {
 
     //Table
     @FXML
-    private TableView<RoomData> roomTable;
+    private TableView<ApartmentData> roomTable;
     @FXML
-    private TableColumn<RoomData,String> nameCol;
+    private TableColumn<ApartmentData,String> nameCol;
     @FXML
-    private TableColumn<RoomData,String> descriptionCol;
+    private TableColumn<ApartmentData,String> descriptionCol;
     @FXML
-    private TableColumn<RoomData,Integer> priceCol;
+    private TableColumn<ApartmentData,Integer> priceCol;
     @FXML
-    private TableColumn<RoomData,String> typeCol;
+    private TableColumn<ApartmentData,String> typeCol;
     @FXML
-    private TableColumn<RoomData,Boolean> statusCol;
+    private TableColumn<ApartmentData,Boolean> statusCol;
+    @FXML
+    private TableColumn<ApartmentData,String> specsCol;
 
     //Search Field
     @FXML
@@ -78,7 +79,7 @@ public class RoomListController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle)  {
 
         setUserInformation(sd.getUsername());
-        s.sideBar(profileBtn,logoutBtn,settingsBtn,roomBtn,homeBtn);
+        s.sideBar(profileBtn,logoutBtn,settingsBtn,roomBtn,homeBtn,apartmentBtn);
         //Type Choice
         filterData();
         showAllBtn.setOnAction(new EventHandler<ActionEvent>() {
@@ -110,23 +111,24 @@ public class RoomListController implements Initializable {
 
     //divide each data on the right column
     private void setCellTable(){
-        nameCol.setCellValueFactory(new PropertyValueFactory<>("roomName"));
-        descriptionCol.setCellValueFactory(new PropertyValueFactory<>("roomDesc"));
-        priceCol.setCellValueFactory(new PropertyValueFactory<>("roomPrice"));
-        typeCol.setCellValueFactory(new PropertyValueFactory<>("roomType"));
-        statusCol.setCellValueFactory(new PropertyValueFactory<>("roomStatus"));
+        nameCol.setCellValueFactory(new PropertyValueFactory<>("apartmentName"));
+        descriptionCol.setCellValueFactory(new PropertyValueFactory<>("apartmentDesc"));
+        priceCol.setCellValueFactory(new PropertyValueFactory<>("apartmentPrice"));
+        typeCol.setCellValueFactory(new PropertyValueFactory<>("apartmentType"));
+        statusCol.setCellValueFactory(new PropertyValueFactory<>("apartmentStatus"));
+        specsCol.setCellValueFactory(new PropertyValueFactory<>("apartmentSpecs"));
     }
     //Display Room on the table
     private void showData(){
 
         getData();
-        roomTable.setItems(roomData);
+        roomTable.setItems(apartmentData);
 
 
     }
     public void filterData() {
         try{
-            String query = "SELECT * FROM ROOMS";
+            String query = "SELECT * FROM apartments";
             preparedStatement = con.prepareStatement(query);
             resultSet = preparedStatement.executeQuery();
             while(resultSet.next()){
@@ -137,22 +139,29 @@ public class RoomListController implements Initializable {
                 String description = resultSet.getString("description");
                 int price = resultSet.getInt("price");
                 String type = resultSet.getString("type");
+                String specs = resultSet.getString("specs");
                 Boolean status = resultSet.getBoolean("status");
-                roomData.add(new RoomData(id,name,description,price,type,status));
+                apartmentData.add(new ApartmentData(id,name,description,price,type,status,specs));
             }
-            FilteredList<RoomData> filteredRoom = new FilteredList<>(roomData, b -> true);
+            FilteredList<ApartmentData> filteredApartment = new FilteredList<>(apartmentData, b -> true);
             //Search Field
             searchField.textProperty().addListener((observable, oldValue, newValue) -> {
-                filteredRoom.setPredicate(roomSearchModel -> {
+                filteredApartment.setPredicate(apartmentSearchModel -> {
                     String searchKeyword = newValue.toLowerCase();
                     if(newValue.isEmpty() || newValue.isBlank() || newValue == null){
                         return true;
                     }
 
-                    if(roomSearchModel.getRoomName().toLowerCase().indexOf(searchKeyword) > -1){
+                    if(apartmentSearchModel.getApartmentName().toLowerCase().indexOf(searchKeyword) > -1){
                         return true;
                     }
-                    else if(roomSearchModel.getRoomType().toLowerCase().indexOf(searchKeyword) > -1){
+                    else if(apartmentSearchModel.getApartmentType().toLowerCase().indexOf(searchKeyword) > -1){
+                        return true;
+                    }
+                    else if(apartmentSearchModel.getApartmentSpecs().toLowerCase().indexOf(searchKeyword) > -1){
+                        return true;
+                    }
+                    else if(apartmentSearchModel.getApartmentDesc().toLowerCase().indexOf(searchKeyword) > -1){
                         return true;
                     }
                     else {
@@ -162,8 +171,8 @@ public class RoomListController implements Initializable {
                 });
             });
             setCellTable();
-            roomTable.setItems(roomData);
-            SortedList<RoomData> sortedRoom = new SortedList<>(filteredRoom);
+            roomTable.setItems(apartmentData);
+            SortedList<ApartmentData> sortedRoom = new SortedList<>(filteredApartment);
             sortedRoom.comparatorProperty().bind(roomTable.comparatorProperty());
             roomTable.setItems(sortedRoom);
 
@@ -175,7 +184,7 @@ public class RoomListController implements Initializable {
     }
     public void getData() {
         try{
-            String query = "SELECT * FROM ROOMS";
+            String query = "SELECT * FROM apartments";
             preparedStatement = con.prepareStatement(query);
             resultSet = preparedStatement.executeQuery();
             while(resultSet.next()){
@@ -186,11 +195,13 @@ public class RoomListController implements Initializable {
                 String description = resultSet.getString("description");
                 int price = resultSet.getInt("price");
                 String type = resultSet.getString("type");
+                String specs = resultSet.getString("specs");
                 Boolean status = resultSet.getBoolean("status");
-                roomData.add(new RoomData(id,name,description,price,type,status));
+
+                apartmentData.add(new ApartmentData(id,name,description,price,type,status,specs));
             }
             setCellTable();
-            roomTable.setItems(roomData);
+            roomTable.setItems(apartmentData);
         }catch(SQLException e){
             e.printStackTrace();
         }
@@ -198,10 +209,10 @@ public class RoomListController implements Initializable {
     }
     public void getFreeRooms(){
         try{
-            String query = "SELECT * FROM ROOMS WHERE status=true ";
+            String query = "SELECT * FROM apartments WHERE status=true ";
             preparedStatement = con.prepareStatement(query);
             resultSet = preparedStatement.executeQuery();
-            roomData.clear();
+            apartmentData.clear();
             while(resultSet.next()){
 
 
@@ -210,12 +221,13 @@ public class RoomListController implements Initializable {
                 String description = resultSet.getString("description");
                 int price = resultSet.getInt("price");
                 String type = resultSet.getString("type");
+                String specs = resultSet.getString("specs");
                 Boolean status = resultSet.getBoolean("status");
-                roomData.add(new RoomData(id,name,description,price,type,status));
+                apartmentData.add(new ApartmentData(id,name,description,price,type,status,specs));
             }
 
             setCellTable();
-            roomTable.setItems(roomData);
+            roomTable.setItems(apartmentData);
 
 
         }catch(SQLException e){
@@ -223,7 +235,7 @@ public class RoomListController implements Initializable {
         }
     }
     public void refresh(){
-        roomData.clear();
+        apartmentData.clear();
         filterData();
     }
 

@@ -32,7 +32,7 @@ public class MyProfileController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle)  {
         setUserInformation(sd.getUsername());
-        s.sideBar(profileBtn,logoutBtn,settingsBtn,roomBtn,homeBtn);
+        s.sideBar(profileBtn,logoutBtn,settingsBtn,roomBtn,homeBtn,apartmentBtn);
     }
 
     public void setUserInformation(String username){

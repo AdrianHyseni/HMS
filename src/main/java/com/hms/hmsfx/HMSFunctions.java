@@ -1,9 +1,6 @@
 package com.hms.hmsfx;
 
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.control.Button;
+import com.hms.hmsfx.Controller.LoginController;
 
 import java.io.IOException;
 
@@ -18,6 +15,11 @@ public class HMSFunctions {
     public  void goToRooms() throws  IOException {
         Main m = new Main();
         m.changeScene("RoomList.fxml");
+
+    }
+    public  void goToApartments() throws  IOException {
+        Main m = new Main();
+        m.changeScene("ApartmentList.fxml");
 
     }
 

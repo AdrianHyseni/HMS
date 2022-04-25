@@ -1,5 +1,6 @@
-package com.hms.hmsfx;
+package com.hms.hmsfx.Controller;
 
+import com.hms.hmsfx.DBUtils;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;

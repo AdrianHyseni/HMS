@@ -8,7 +8,7 @@ import javafx.scene.control.Button;
 public class SideBar {
     SystemData sd = new SystemData();
     HMSFunctions hmsFunctions = new HMSFunctions();
-    public void sideBar(Button goToProfile, Button logout, Button goToSettings, Button goToRooms,Button home){
+    public void sideBar(Button goToProfile, Button logout, Button goToSettings, Button goToRooms,Button home,Button apartments){
         goToSettings.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
@@ -58,6 +58,17 @@ public class SideBar {
             public void handle(ActionEvent event) {
                 try{
                     hmsFunctions.goToDashboard();
+                }
+                catch (Exception e){
+                    e.printStackTrace();
+                }
+            }
+        });
+        apartments.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                try{
+                    hmsFunctions.goToApartments();
                 }
                 catch (Exception e){
                     e.printStackTrace();
