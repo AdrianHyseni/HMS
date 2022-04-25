@@ -1,5 +1,6 @@
-package com.hms.hmsfx;
+package com.hms.hmsfx.Controller;
 
+import com.hms.hmsfx.DatabaseConnection;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;

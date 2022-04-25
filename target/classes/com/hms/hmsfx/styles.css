@@ -552,3 +552,63 @@
 #room-table col {
     -fx-pref-width: 80px;
 }
+
+
+/*Room list Styling*/
+.room-list-center{
+    -fx-pref-height: 600px;
+    -fx-pref-width: 300px;
+    -fx-alignment: center;
+    -fx-spacing: 20px;
+    -fx-padding: 40px;
+
+}
+.room-list-table-section{
+    -fx-padding: 20px;
+    -fx-background-color: rgba(5, 68, 94,0.6);
+    -fx-background-radius: 20px;
+    -fx-pref-height: 600px;
+    -fx-pref-width: 300px;
+    -fx-alignment: center;
+}
+
+.room-list-label-section{
+    -fx-padding: 20px;
+    -fx-background-color: #75E6DA;
+    -fx-background-radius: 20px;
+    -fx-pref-height: 200px;
+    -fx-pref-width: 300px;
+    -fx-alignment: center;
+    -fx-text-alignment: center;
+}
+.room-list-controll-section{
+    -fx-alignment: center;
+    -fx-spacing: 20px;
+    -fx-pref-width: 300px;
+
+}
+.table-controller{}
+.room-list-btn1{
+    -fx-text-fill: #fff;
+    -fx-background-color: rgba(5, 68, 94);
+    -fx-pref-width: 150px;
+    -fx-background-radius: 30px;
+    -fx-font-size: 16px;
+}
+.room-list-btn2{
+    -fx-text-fill: #fff;
+    -fx-background-color: rgba(6, 40, 140);
+    -fx-pref-width: 150px;
+    -fx-background-radius: 30px;
+    -fx-font-size: 16px;
+}
+.room-list-search{
+    -fx-pref-width: 600px;
+    -fx-pref-height: 30px;
+    -fx-background-color:  rgba(255, 255, 255, 0.85);
+    -fx-text-fill: rgba(5, 68, 94);
+    -fx-alignment: center;
+    -fx-background-radius: 30px;
+    -fx-font-size: 16px;
+
+}

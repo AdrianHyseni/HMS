@@ -3,19 +3,16 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.hms.hmsfx.Controller.AddApartmentController">
    <top>
       <HBox prefHeight="100.0" prefWidth="200.0" styleClass="header" BorderPane.alignment="CENTER">
          <children>
             <HBox prefHeight="100.0" prefWidth="200.0" styleClass="header-section">
                <children>
-                  <Button mnemonicParsing="false" styleClass="hamburger-btn" />
+                  <Button fx:id="homeBtn" mnemonicParsing="false" styleClass="hamburger-btn" />
                   <Label id="test" alignment="CENTER_RIGHT" contentDisplay="RIGHT" styleClass="title-label" text="Merlin Hotel" />
                </children>
             </HBox>
-            <Button mnemonicParsing="false" styleClass="header-btn" text="Add Room" />
-            <Button mnemonicParsing="false" styleClass="header-btn" text="Add Apartment" />
-            <Button mnemonicParsing="false" styleClass="header-btn" text="Add Offerts" />
          </children>
       </HBox>
    </top>
@@ -27,19 +24,19 @@
                   <Label styleClass="logo" />
                   <VBox id="profile-section" prefHeight="200.0" prefWidth="100.0">
                      <children>
-                        <Label styleClass="username" text="Username" />
-                        <Button mnemonicParsing="false" styleClass="profile-btn" text="Profile" />
-                        <Button layoutX="10.0" layoutY="10.0" mnemonicParsing="false" styleClass="profile-btn" text="Logout" />
+                        <Label fx:id="usernameText" styleClass="username" text="Username" />
+                        <Button fx:id="profileBtn" mnemonicParsing="false" styleClass="profile-btn" text="Profile" />
+                        <Button fx:id="logoutBtn" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" styleClass="profile-btn" text="Logout" />
                      </children>
                   </VBox>
                </children>
             </HBox>
-            <Button mnemonicParsing="false" styleClass="menu-btn" text="Rooms" />
-            <Button layoutX="10.0" layoutY="10.0" mnemonicParsing="false" styleClass="menu-btn" text="Appartments" />
-            <Button layoutX="10.0" layoutY="10.0" mnemonicParsing="false" styleClass="menu-btn" text="Reservations" />
-            <Button layoutX="10.0" layoutY="10.0" mnemonicParsing="false" styleClass="menu-btn" text="Costs" />
-            <Button layoutX="10.0" layoutY="35.0" mnemonicParsing="false" styleClass="menu-btn" text="Bills" />
-            <Button layoutX="10.0" layoutY="60.0" mnemonicParsing="false" styleClass="menu-btn" text="Settings" />
+            <Button fx:id="roomBtn" mnemonicParsing="false" styleClass="menu-btn" text="Rooms" />
+            <Button fx:id="apartmentBtn" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" styleClass="menu-btn" text="Appartments" />
+            <Button fx:id="reservationBtn" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" styleClass="menu-btn" text="Reservations" />
+            <Button fx:id="costsBtn" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" styleClass="menu-btn" text="Costs" />
+            <Button fx:id="billsBtn" layoutX="10.0" layoutY="35.0" mnemonicParsing="false" styleClass="menu-btn" text="Bills" />
+            <Button fx:id="settingsBtn" layoutX="10.0" layoutY="60.0" mnemonicParsing="false" styleClass="menu-btn" text="Settings" />
          </children>
       </VBox>
    </left>
@@ -58,19 +55,21 @@
                <children>
                   <VBox id="left-side" prefHeight="200.0" prefWidth="100.0">
                      <children>
-                        <Label id="room-label-1" text="Label" />
-                        <TextField id="room-input" />
-                        <Label id="room-label-1" layoutX="10.0" layoutY="10.0" text="Label" />
-                        <TextField id="room-input" layoutX="10.0" layoutY="27.0" />
-                        <Label id="room-label-1" layoutX="10.0" layoutY="52.0" text="Label" />
-                        <TextField id="room-input" layoutX="10.0" layoutY="69.0" />
-                        <Label id="room-label-1" layoutX="10.0" layoutY="94.0" text="Label" />
-                        <TextField id="room-input" layoutX="10.0" layoutY="111.0" />
-                        <Label id="room-label-1" text="Label" />
-                        <TextArea prefHeight="200.0" prefWidth="200.0" styleClass="text-area-room" />
+                        <Label id="room-label-1" text="Name" />
+                        <TextField id="room-input" fx:id="nameTf" />
+                        <Label id="room-label-1" layoutX="10.0" layoutY="10.0" text="Price" />
+                        <TextField id="room-input" fx:id="priceTf" layoutX="10.0" layoutY="27.0" />
+                        <Label id="room-label-1" layoutX="10.0" layoutY="52.0" text="Type" />
+                        <ChoiceBox fx:id="typeCb" prefWidth="150.0" />
+                        <Label id="room-label-1" layoutX="10.0" layoutY="94.0" text="Status" />
+                        <CheckBox fx:id="status" mnemonicParsing="false" text="Is Free" />
+                        <Label id="room-label-1" text="Specs" />
+                        <TextArea fx:id="specsTa" prefHeight="200.0" prefWidth="200.0" styleClass="text-area-room" />
+                        <Label id="room-label-1" layoutX="10.0" layoutY="175.0" text="Description" />
+                        <TextArea fx:id="descriptionTa" layoutX="10.0" layoutY="192.0" prefHeight="200.0" prefWidth="200.0" styleClass="text-area-room" />
                         <HBox id="room-add-section" prefHeight="100.0" prefWidth="200.0">
                            <children>
-                              <Button id="room-btn-1" mnemonicParsing="false" text="Add" />
+                              <Button id="room-btn-1" fx:id="addBtn" mnemonicParsing="false" text="Add" />
                               <Button id="room-btn-2" mnemonicParsing="false" text="Edit" />
                            </children>
                         </HBox>
@@ -80,15 +79,20 @@
                      <children>
                         <HBox prefHeight="100.0" prefWidth="200.0" styleClass="search-section">
                            <children>
-                              <TextField id="search-room" />
-                              <Button id="room-btn-1" mnemonicParsing="false" text="Search" />
-                              <Button id="room-btn-2" mnemonicParsing="false" text="Show All" />
+                              <TextField id="search-room" fx:id="searchField" />
+                              <Button id="room-btn-1" fx:id="showAllBtn" mnemonicParsing="false" text="Show All" />
+                              <Button id="room-btn-2" fx:id="deleteBtn" mnemonicParsing="false" text="Delete" />
                            </children>
                         </HBox>
-                        <TableView id="room-table" prefHeight="200.0" prefWidth="200.0">
+                        <TableView id="room-table" fx:id="apartmentTable" prefHeight="200.0" prefWidth="200.0">
                           <columns>
-                            <TableColumn prefWidth="75.0" text="C1" />
-                            <TableColumn prefWidth="75.0" text="C2" />
+                            <TableColumn fx:id="idCol" prefWidth="75.0" text="Id" />
+                            <TableColumn fx:id="nameCol" prefWidth="75.0" text="Name" />
+                              <TableColumn fx:id="descCol" prefWidth="75.0" text="Description" />
+                              <TableColumn fx:id="priceCol" prefWidth="75.0" text="Price" />
+                              <TableColumn fx:id="typeCol" prefWidth="75.0" text="Type" />
+                              <TableColumn fx:id="statusCol" prefWidth="75.0" text="Is Free" />
+                              <TableColumn fx:id="specsCol" prefWidth="75.0" text="Specs" />
                           </columns>
                         </TableView>
                      </children>
