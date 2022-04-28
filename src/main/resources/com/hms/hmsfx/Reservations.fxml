@@ -3,7 +3,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.hms.hmsfx.Controller.ReservationController">
    <top>
       <HBox prefHeight="100.0" prefWidth="200.0" styleClass="header" BorderPane.alignment="CENTER">
          <children>
@@ -72,22 +72,22 @@
                   <VBox prefHeight="200.0" prefWidth="100.0" styleClass="reservation-section-2">
                      <children>
                         <Label id="reservation-text" text="Reference" />
-                        <ChoiceBox id="reservation-date" prefWidth="150.0" />
+                        <ChoiceBox id="reservation-date" fx:id="referenceCb" prefWidth="150.0" />
                         <Label id="reservation-text" layoutX="10.0" layoutY="36.0" text="Check-in" />
-                        <DatePicker styleClass="reservation-date" />
+                        <DatePicker fx:id="checkInDc" styleClass="reservation-date" />
                         <Label id="reservation-text" layoutX="10.0" layoutY="53.0" text="Check-out" />
-                        <DatePicker layoutX="10.0" layoutY="71.0" styleClass="reservation-date" />
+                        <DatePicker fx:id="checkOutDc" layoutX="10.0" layoutY="71.0" styleClass="reservation-date" />
                         <Label id="reservation-text" layoutX="10.0" layoutY="71.0" text="Primary Price" />
-                        <TextField styleClass="reservation-input" />
+                        <TextField fx:id="primaryPriceTf" styleClass="reservation-input" />
                         <Label id="reservation-text" layoutX="10.0" layoutY="88.0" text="Discount" />
-                        <TextField layoutX="10.0" layoutY="157.0" styleClass="reservation-input" />
+                        <TextField fx:id="discountTf" layoutX="10.0" layoutY="157.0" styleClass="reservation-input" />
                         <Label id="reservation-text" layoutX="10.0" layoutY="106.0" text="Total Price" />
-                        <TextField layoutX="10.0" layoutY="200.0" styleClass="reservation-input" />
+                        <TextField fx:id="totalPriceTf" layoutX="10.0" layoutY="200.0" styleClass="reservation-input" />
                      </children>
                   </VBox>
                </children>
             </HBox>
-            <Button alignment="CENTER" mnemonicParsing="false" styleClass="reservation-bt" text="Make The reservation" />
+            <Button fx:id="reservBtn" alignment="CENTER" mnemonicParsing="false" styleClass="reservation-bt" text="Make The reservation" />
          </children>
       </VBox>
    </center>
