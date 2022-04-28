@@ -66,6 +66,8 @@ public class AddRoomController implements Initializable {
     private Button deleteBtn;
     @FXML
     private Button showAllBtn;
+    @FXML
+    private Button reservationBtn;
 
     //Table
     @FXML
@@ -97,7 +99,7 @@ public class AddRoomController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle)  {
 
         setUserInformation(sd.getUsername());
-        s.sideBar(profileBtn,logoutBtn,settingsBtn,roomBtn,homeBtn,apartmentBtn);
+        s.sideBar(profileBtn,logoutBtn,settingsBtn,roomBtn,homeBtn,apartmentBtn,reservationBtn);
         //Type Choice
         ArrayList<String> type =new ArrayList<>();
         type.add("single");

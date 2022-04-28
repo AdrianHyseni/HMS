@@ -55,6 +55,12 @@ public class HMSFunctions {
         m.changeScene("Dashboard.fxml");
     }
 
+    public void makeReservation() throws IOException{
+        Main m = new Main();
+        m.changeScene("Reservations.fxml");
+    }
+
+
 
 
 

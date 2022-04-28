@@ -62,6 +62,9 @@ public class ReservationController implements Initializable {
     private TextField primaryPriceTf;
     @FXML
     private Button reservBtn;
+    @FXML
+    private Button reservationBtn;
+
     //Side
     @FXML
     private Label usernameText;
@@ -84,7 +87,7 @@ public class ReservationController implements Initializable {
 
   setUserInformation(sd.getUsername());
   usernameText.setText("test");
-  s.sideBar(profileBtn,logoutBtn,settingsBtn,roomBtn,homeBtn,apartmentBtn);
+  s.sideBar(profileBtn,logoutBtn,settingsBtn,roomBtn,homeBtn,apartmentBtn,reservationBtn);
   ArrayList<String> type =new ArrayList<>();
   type.add("Apartments");
   type.add("Rooms");
@@ -118,27 +121,34 @@ public class ReservationController implements Initializable {
     }
    }
   });
+
  }
 
 
- public int checkDiscount(String text){
-  if(text.matches("\\b\\d+\\b")){
-    if(Integer.valueOf(text)<1){
-     return Integer.valueOf(text);
+ public double checkDouble(String text){
+  if(text.matches("[0-9]{1,13}(\\\\.[0-9]*)?")){
+    if(Double.valueOf(text)<1){
+     return Double.valueOf(text);
     }
     else{
      Alert alert = new Alert(Alert.AlertType.ERROR);
      alert.setContentText("There was a problem please Check discount field, it must be  a number between 0-1!");
      alert.setTitle("Discount Error");
      alert.show();
+     return 0;
     }
   }else{
    Alert alert = new Alert(Alert.AlertType.ERROR);
    alert.setContentText("There was a problem! Discount Must be a number!");
    alert.setTitle("Discount Error");
    alert.show();
+   return 0;
   }
-  return 0;
+ }
+ public double calculateTotalPrice(String primaryPrice, String discount){
+  double totalPrice =0.0;
+  totalPrice = Double.valueOf(primaryPrice) * Double.valueOf(discount);
+  return  totalPrice;
  }
  public String checkNull(String text){
   if(text.equals("") || text.isBlank() || text.isEmpty() || text==null){
@@ -182,10 +192,9 @@ public class ReservationController implements Initializable {
     return id;
  }
  public void makeReservation() throws SQLException {
-
    reserveData();
-   String insertRoomsQuery = "INSERT INTO   booking(type, room_fk, apartment_fk, check_in, check_out, price, created_by, clientName, clientSurname, clientId, clientPhone)VALUES (?,?,null,?,?,?,?,?,?,?,?)";
-  String insertAptQuery = "INSERT INTO  booking(type, room_fk, apartment_fk, check_in, check_out, price, created_by, clientName, clientSurname, clientId, clientPhone) VALUES (?,null,?,?,?,?,?,?,?,?,?)";
+   String insertRoomsQuery = "INSERT INTO   booking(type, room_fk, apartment_fk, check_in, check_out, totalPrice, created_by, clientName, clientSurname, clientId, clientPhone, dicount, primaryPrice)VALUES (?,?,null,?,?,?,?,?,?,?,?,?,?)";
+   String insertAptQuery = "INSERT INTO  booking(type, room_fk, apartment_fk, check_in, check_out, totalPrice, created_by, clientName, clientSurname, clientId, clientPhone, dicount, primaryPrice) VALUES (?,null,?,?,?,?,?,?,?,?,?,?,?)";
 
 
    ArrayList<ReservationData> list = reserveData();
@@ -231,14 +240,17 @@ public class ReservationController implements Initializable {
  }
 
  private void test(ReservationData r, PreparedStatement preparedStatement1) throws SQLException {
-  preparedStatement1.setString(3,r.getCheckIn());
-  preparedStatement1.setString(4, r.getCheckOut());
-  preparedStatement1.setInt(5, r.getPrimaryPrice());
-  preparedStatement1.setInt(6, getUserId(usernameText.getText()));
-  preparedStatement1.setString(7, r.getClientName());
-  preparedStatement1.setString(8, r.getClientSurname());
-  preparedStatement1.setString(9, r.getClientId());
-  preparedStatement1.setString(10, phoneTf.getText());
+  preparedStatement1.setObject(3,r.getCheckIn());
+  preparedStatement1.setObject(4, r.getCheckOut());
+  preparedStatement1.setObject(5, r.getPrimaryPrice());
+  preparedStatement1.setObject(6, getUserId(usernameText.getText()));
+  preparedStatement1.setObject(7, r.getClientName());
+  preparedStatement1.setObject(8, r.getClientSurname());
+  preparedStatement1.setObject(9, r.getClientId());
+  preparedStatement1.setObject(10, phoneTf.getText());
+  preparedStatement1.setObject(11, discountTf.getText());
+  preparedStatement1.setObject(12, primaryPriceTf.getText());
+
   preparedStatement1.executeUpdate();
  }
 
@@ -252,10 +264,10 @@ public class ReservationController implements Initializable {
                                 referenceCb.getSelectionModel().getSelectedItem().toString(),
                                 checkStartDate(checkInDc,checkOutDc),
                                 checkEndDate(checkInDc,checkOutDc),
-                                Integer.valueOf(checkNull(primaryPriceTf.getText())),
-                                Integer.valueOf(checkNull(discountTf.getText())),
-                                Integer.valueOf(checkNull(totalPriceTf.getText())),
-                                Integer.valueOf(getUserId(usernameText.getText()))
+                                Double.valueOf(checkNull(primaryPriceTf.getText())),
+                                Double.valueOf(checkNull(discountTf.getText())),
+                                Double.valueOf(checkNull(totalPriceTf.getText())),
+                                Double.valueOf(getUserId(usernameText.getText()))
                                 ));
   rList.forEach(e -> System.out.println(e.getCreatedBy()));
   return rList;

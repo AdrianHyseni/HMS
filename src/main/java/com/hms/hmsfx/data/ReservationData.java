@@ -9,10 +9,10 @@ public class ReservationData {
     String reference;
     String checkIn;
     String checkOut;
-    int primaryPrice;
-    int discount;
-    int totalPrice;
-    int createdBy;
+    double primaryPrice;
+    double discount;
+    double totalPrice;
+    double createdBy;
 
     public ReservationData(){}
 
@@ -34,7 +34,7 @@ public class ReservationData {
                 '}';
     }
 
-    public ReservationData(String clientName, String clientSurname, String clientId, String type, String envStaying, String reference, String checkIn, String checkOut, int primaryPrice, int discount, int totalPrice, int createdBy) {
+    public ReservationData(String clientName, String clientSurname, String clientId, String type, String envStaying, String reference, String checkIn, String checkOut, double primaryPrice, double discount, double totalPrice, double createdBy) {
         this.clientName = clientName;
         this.clientSurname = clientSurname;
         this.clientId = clientId;
@@ -113,35 +113,35 @@ public class ReservationData {
         this.checkOut = checkOut;
     }
 
-    public int getPrimaryPrice() {
+    public double getPrimaryPrice() {
         return primaryPrice;
     }
 
-    public void setPrimaryPrice(int primaryPrice) {
+    public void setPrimaryPrice(double primaryPrice) {
         this.primaryPrice = primaryPrice;
     }
 
-    public int getDiscount() {
+    public double getDiscount() {
         return discount;
     }
 
-    public void setDiscount(int discount) {
+    public void setDiscount(double discount) {
         this.discount = discount;
     }
 
-    public int getTotalPrice() {
+    public double getTotalPrice() {
         return totalPrice;
     }
 
-    public void setTotalPrice(int totalPrice) {
+    public void setTotalPrice(double totalPrice) {
         this.totalPrice = totalPrice;
     }
 
-    public int getCreatedBy() {
+    public double getCreatedBy() {
         return createdBy;
     }
 
-    public void setCreatedBy(int createdBy) {
+    public void setCreatedBy(double createdBy) {
         this.createdBy = createdBy;
     }
 }

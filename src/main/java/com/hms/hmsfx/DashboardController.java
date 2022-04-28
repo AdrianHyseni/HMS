@@ -60,7 +60,7 @@ public class DashboardController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle)  {
-        s.sideBar(profileBtn,logoutBtn,settingsBtnSide,roomBtnSide,homeBtn,apartmentBtn);
+        s.sideBar(profileBtn,logoutBtn,settingsBtnSide,roomBtnSide,homeBtn,apartmentBtn,reservationBtn);
         roomBtn.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
