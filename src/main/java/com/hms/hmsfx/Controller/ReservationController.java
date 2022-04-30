@@ -34,7 +34,13 @@ public class ReservationController implements Initializable {
   Connection con = connection.getConnection();
   ResultSet resultSet = null;
   PreparedStatement preparedStatement = null;
- PreparedStatement preparedStatement1 = null;
+  PreparedStatement preparedStatement1 = null;
+  PreparedStatement preparedStatement2 = null;
+  PreparedStatement preparedStatement3 = null;
+ PreparedStatement preparedStatement4 = null;
+
+
+
    //Reservation
     @FXML
     private TextField nameTf;
@@ -55,11 +61,11 @@ public class ReservationController implements Initializable {
     @FXML
     private DatePicker checkOutDc;
     @FXML
-    private TextField totalPriceTf;
+    private Label totalPriceTf;
     @FXML
     private TextField discountTf;
     @FXML
-    private TextField primaryPriceTf;
+    private Label primaryPriceTf;
     @FXML
     private Button reservBtn;
     @FXML
@@ -109,6 +115,40 @@ public class ReservationController implements Initializable {
     envCb.setItems(list2);
    }
   });
+  envCb.getSelectionModel().selectedItemProperty().addListener(new ChangeListener() {
+   @Override
+   public void changed(ObservableValue observableValue, Object o, Object t1) {
+    try{
+     ArrayList<Double> list = new ArrayList<>();
+     if(typeCb.getSelectionModel().getSelectedItem().equals("Rooms")){
+      list.add(getRoomPrice(t1.toString()));
+     }else if(typeCb.getSelectionModel().getSelectedItem().equals("Apartments")){
+      list.add(getApartmentPrice(t1.toString()));
+     }
+
+    ObservableList list2 = FXCollections.observableArrayList(list);
+    list2.forEach(e -> primaryPriceTf.setText(e.toString()));}
+    catch (SQLException e ){
+     e.printStackTrace();
+    }
+   }
+  });
+
+  discountTf.textProperty().addListener(((observableValue, s1, t1) -> {
+     if(t1.matches("[0-9]{1,13}(\\\\.[0-9]*)?")) {
+      int days = checkOutDc.getValue().getDayOfYear() - checkInDc.getValue().getDayOfYear();
+      double price = Double.parseDouble(calculateTotalPrice(primaryPriceTf.getText(), t1, days));
+      totalPriceTf.setText(String.valueOf(price));
+     }else {
+      Alert alert = new Alert(Alert.AlertType.ERROR);
+      alert.setTitle("Error discount");
+      alert.setContentText("Please the ");
+      alert.show();
+     }
+
+
+  }));
+
   reservBtn.setOnAction(new EventHandler<ActionEvent>() {
    @Override
    public void handle(ActionEvent event) {
@@ -122,33 +162,16 @@ public class ReservationController implements Initializable {
    }
   });
 
- }
 
-
- public double checkDouble(String text){
-  if(text.matches("[0-9]{1,13}(\\\\.[0-9]*)?")){
-    if(Double.valueOf(text)<1){
-     return Double.valueOf(text);
-    }
-    else{
-     Alert alert = new Alert(Alert.AlertType.ERROR);
-     alert.setContentText("There was a problem please Check discount field, it must be  a number between 0-1!");
-     alert.setTitle("Discount Error");
-     alert.show();
-     return 0;
-    }
-  }else{
-   Alert alert = new Alert(Alert.AlertType.ERROR);
-   alert.setContentText("There was a problem! Discount Must be a number!");
-   alert.setTitle("Discount Error");
-   alert.show();
-   return 0;
-  }
  }
- public double calculateTotalPrice(String primaryPrice, String discount){
+ public String calculateTotalPrice(String primaryPrice, String discount,int days){
   double totalPrice =0.0;
-  totalPrice = Double.valueOf(primaryPrice) * Double.valueOf(discount);
-  return  totalPrice;
+  if (discountTf.getText().isEmpty() || discountTf.getText().equals("") || discountTf.getText().isBlank()){
+   totalPrice = Double.valueOf(primaryPrice)*days;
+  }else {
+   totalPrice = (Double.valueOf(primaryPrice)*days) - ((Double.valueOf(primaryPrice) * days) *( Double.valueOf(discount)/100));
+  }
+  return  String.valueOf(totalPrice);
  }
  public String checkNull(String text){
   if(text.equals("") || text.isBlank() || text.isEmpty() || text==null){
@@ -193,25 +216,27 @@ public class ReservationController implements Initializable {
  }
  public void makeReservation() throws SQLException {
    reserveData();
-   String insertRoomsQuery = "INSERT INTO   booking(type, room_fk, apartment_fk, check_in, check_out, totalPrice, created_by, clientName, clientSurname, clientId, clientPhone, dicount, primaryPrice)VALUES (?,?,null,?,?,?,?,?,?,?,?,?,?)";
-   String insertAptQuery = "INSERT INTO  booking(type, room_fk, apartment_fk, check_in, check_out, totalPrice, created_by, clientName, clientSurname, clientId, clientPhone, dicount, primaryPrice) VALUES (?,null,?,?,?,?,?,?,?,?,?,?,?)";
+   String insertRoomsQuery = "INSERT INTO  booking(type, room_fk, check_in, check_out, totalPrice, created_by, clientName, clientSurname, clientId, clientPhone, dicount, primaryPrice)VALUES (?,?,?,?,?,?,?,?,?,?,?,?)";
+   String insertAptQuery =   "INSERT INTO  booking(type, apartment_fk, check_in, check_out, totalPrice, created_by, clientName, clientSurname, clientId, clientPhone, dicount, primaryPrice) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)";
 
 
    ArrayList<ReservationData> list = reserveData();
    for(ReservationData r: list){
     try{
-
-
      if(typeCb.getSelectionModel().getSelectedItem().equals("Rooms")) {
-      preparedStatement = con.prepareStatement(insertRoomsQuery);
-      preparedStatement.setString(1,r.getType());
-      preparedStatement.setInt(2, getRoomId(r.getEnvStaying()));
-      test(r, preparedStatement);
+      updateRooms(r.getEnvStaying());
+      preparedStatement4 = con.prepareStatement(insertRoomsQuery);
+      preparedStatement4.setString(1,r.getType());
+      preparedStatement4.setInt(2, getRoomId(r.getEnvStaying()));
+      test(r,preparedStatement4);
+
+
      }else if(typeCb.getSelectionModel().getSelectedItem().equals("Apartments")) {
       preparedStatement1 = con.prepareStatement(insertAptQuery);
       preparedStatement1.setString(1,r.getType());
       preparedStatement1.setInt(2, getApartmentId(r.getEnvStaying()));
       test(r, preparedStatement1);
+      updateApartments(r.getEnvStaying());
      }
      else {
       Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -232,28 +257,21 @@ public class ReservationController implements Initializable {
 
    }
 
-
-
-
-
-
  }
+ private void test(ReservationData r, PreparedStatement p) throws SQLException {
+  p.setObject(3,r.getCheckIn());
+  p.setObject(4, r.getCheckOut());
+  p.setObject(5, r.getPrimaryPrice());
+  p.setObject(6, getUserId(usernameText.getText()));
+  p.setObject(7, r.getClientName());
+  p.setObject(8, r.getClientSurname());
+  p.setObject(9, r.getClientId());
+  p.setObject(10, phoneTf.getText());
+  p.setObject(11, discountTf.getText());
+  p.setObject(12, primaryPriceTf.getText());
 
- private void test(ReservationData r, PreparedStatement preparedStatement1) throws SQLException {
-  preparedStatement1.setObject(3,r.getCheckIn());
-  preparedStatement1.setObject(4, r.getCheckOut());
-  preparedStatement1.setObject(5, r.getPrimaryPrice());
-  preparedStatement1.setObject(6, getUserId(usernameText.getText()));
-  preparedStatement1.setObject(7, r.getClientName());
-  preparedStatement1.setObject(8, r.getClientSurname());
-  preparedStatement1.setObject(9, r.getClientId());
-  preparedStatement1.setObject(10, phoneTf.getText());
-  preparedStatement1.setObject(11, discountTf.getText());
-  preparedStatement1.setObject(12, primaryPriceTf.getText());
-
-  preparedStatement1.executeUpdate();
+  p.executeUpdate();
  }
-
  public ArrayList<ReservationData> reserveData() throws SQLException {
   ArrayList<ReservationData> rList = new ArrayList<>();
   rList.add(new ReservationData(checkNull(nameTf.getText()),
@@ -272,11 +290,10 @@ public class ReservationController implements Initializable {
   rList.forEach(e -> System.out.println(e.getCreatedBy()));
   return rList;
  }
-
  public String checkStartDate(DatePicker startDate, DatePicker endDate){
   LocalDateTime now = LocalDateTime.now();
 
-  if(startDate.getValue().getDayOfYear() > now.getDayOfYear()){
+  if(startDate.getValue().getDayOfYear() >= now.getDayOfYear()){
     return startDate.getValue().toString();
   }else if(startDate.getValue().getDayOfYear()>endDate.getValue().getDayOfYear()){
    return startDate.getValue().toString();
@@ -289,11 +306,10 @@ public class ReservationController implements Initializable {
   }
 
  }
-
  public String checkEndDate(DatePicker startDate, DatePicker endDate){
   LocalDateTime now = LocalDateTime.now();
 
-  if(startDate.getValue().getDayOfYear() > now.getDayOfYear()){
+  if(startDate.getValue().getDayOfYear() >= now.getDayOfYear()){
    return endDate.getValue().toString();
   }else if(startDate.getValue().getDayOfYear()>endDate.getValue().getDayOfYear()){
    return endDate.getValue().toString();
@@ -302,9 +318,6 @@ public class ReservationController implements Initializable {
   }
 
  }
-
-
- //Check for the free spaces on Hotel
  public ObservableList freeSpaces(String env){
   ObservableList<String> list = null;
   try {
@@ -341,10 +354,46 @@ public class ReservationController implements Initializable {
   return list;
 
  }
+ public double getRoomPrice(String name) throws SQLException{
+  double price = 0.0;
+  String priceQuery = "SELECT price FROM rooms where name=?";
+  preparedStatement =con.prepareStatement(priceQuery);
+  preparedStatement.setString(1,name);
+  resultSet = preparedStatement.executeQuery();
+  while(resultSet.next()){
 
+   price = resultSet.getDouble("price");
+ }
+  return price;
+}
+ public double getApartmentPrice(String name) throws SQLException{
+  double price = 0.0;
+  String priceQuery = "SELECT price FROM apartments where name=?";
+  preparedStatement =con.prepareStatement(priceQuery);
+  preparedStatement.setString(1,name);
+  resultSet = preparedStatement.executeQuery();
+  while(resultSet.next()){
 
+   price = resultSet.getDouble("price");
+  }
+  return price;
+ }
  public void setUserInformation(String username){
   usernameText.setText(username);
+ }
+ public void updateRooms(String name) throws  SQLException{
+  String query1 = "update rooms set status=false where name=?";
+   preparedStatement2 = con.prepareStatement(query1);
+   preparedStatement2.setString(1, name);
+   preparedStatement2.executeUpdate();
+
+ }
+ public void updateApartments(String name) throws  SQLException{
+  String query = "UPDATE APARTMENTS SET status=false WHERE name=?";
+  preparedStatement3 = con.prepareStatement(query);
+  preparedStatement3.setString(1, name);
+  preparedStatement3.executeUpdate();
+
  }
 
 
