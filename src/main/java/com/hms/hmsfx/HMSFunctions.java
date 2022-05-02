@@ -3,6 +3,10 @@ package com.hms.hmsfx;
 import com.hms.hmsfx.Controller.LoginController;
 
 import java.io.IOException;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 public class HMSFunctions {
 
@@ -57,8 +61,33 @@ public class HMSFunctions {
 
     public void makeReservation() throws IOException{
         Main m = new Main();
+        try{
+        update();
         m.changeScene("Reservations.fxml");
+        }catch (Exception sql){
+            sql.printStackTrace();
+        }
     }
+
+    public void gotoReservationList() throws IOException{
+        Main m = new Main();
+        m.changeScene("ReservationList.fxml");
+    }
+
+    public void update() throws SQLException {
+        DatabaseConnection connection = new DatabaseConnection();
+        Connection con = connection.getConnection();
+        PreparedStatement preparedStatement = null;
+        PreparedStatement preparedStatement2 = null;
+        String queryRooms = "UPDATE rooms SET status = true WHERE id IN (SELECT room_fk from booking where  check_out < NOW())";
+        String queryApartments = "UPDATE apartments SET status = true WHERE id IN (SELECT apartment_fk from booking where  check_out < NOW())";
+        preparedStatement = con.prepareStatement(queryRooms);
+        preparedStatement.executeUpdate();
+        preparedStatement2 = con.prepareStatement(queryApartments);
+        preparedStatement2.executeUpdate();
+
+    }
+
 
 
 

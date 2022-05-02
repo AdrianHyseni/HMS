@@ -49,6 +49,8 @@ public class DashboardController implements Initializable {
 
     @FXML
     private Button homeBtn;
+    @FXML
+    private Button allReservationBtn;
 
     HMSFunctions hmsFunctions = new HMSFunctions();
     SideBar s = new SideBar();
@@ -60,7 +62,7 @@ public class DashboardController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle)  {
-        s.sideBar(profileBtn,logoutBtn,settingsBtnSide,roomBtnSide,homeBtn,apartmentBtn,reservationBtn);
+        s.sideBar(profileBtn,logoutBtn,settingsBtnSide,roomBtnSide,homeBtn,apartmentBtn,reservationBtn, allReservationBtn);
         roomBtn.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {

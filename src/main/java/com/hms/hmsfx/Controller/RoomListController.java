@@ -50,6 +50,8 @@ public class RoomListController implements Initializable {
     private Button freeRoomsBtn;
     @FXML
     private Button showAllBtn;
+    @FXML
+    private Button allReservationBtn;
 
     //Table
     @FXML
@@ -72,6 +74,7 @@ public class RoomListController implements Initializable {
     private TextField searchField;
 
 
+
     SideBar s = new SideBar();
 
 
@@ -80,7 +83,7 @@ public class RoomListController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle)  {
 
         setUserInformation(sd.getUsername());
-        s.sideBar(profileBtn,logoutBtn,settingsBtn,roomBtn,homeBtn,apartmentBtn,reservationBtn);
+        s.sideBar(profileBtn,logoutBtn,settingsBtn,roomBtn,homeBtn,apartmentBtn,reservationBtn,allReservationBtn);
         //Type Choice
         filterData();
         showAllBtn.setOnAction(new EventHandler<ActionEvent>() {

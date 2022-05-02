@@ -10,7 +10,7 @@ import java.io.IOException;
 public class SideBar {
     SystemData sd = new SystemData();
     HMSFunctions hmsFunctions = new HMSFunctions();
-    public void sideBar(Button goToProfile, Button logout, Button goToSettings, Button goToRooms,Button home,Button apartments, Button makeReservation){
+    public void sideBar(Button goToProfile, Button logout, Button goToSettings, Button goToRooms,Button home,Button apartments, Button makeReservation, Button reservationList){
         goToSettings.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
@@ -82,6 +82,17 @@ public class SideBar {
             public void handle(ActionEvent event) {
                 try {
                     hmsFunctions.makeReservation();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+
+        reservationList.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                try {
+                    hmsFunctions.gotoReservationList();
                 } catch (IOException e) {
                     e.printStackTrace();
                 }

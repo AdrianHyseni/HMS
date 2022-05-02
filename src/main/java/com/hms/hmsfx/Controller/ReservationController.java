@@ -70,7 +70,8 @@ public class ReservationController implements Initializable {
     private Button reservBtn;
     @FXML
     private Button reservationBtn;
-
+    @FXML
+    private Button allReservationBtn;
     //Side
     @FXML
     private Label usernameText;
@@ -93,7 +94,7 @@ public class ReservationController implements Initializable {
 
   setUserInformation(sd.getUsername());
   usernameText.setText("test");
-  s.sideBar(profileBtn,logoutBtn,settingsBtn,roomBtn,homeBtn,apartmentBtn,reservationBtn);
+  s.sideBar(profileBtn,logoutBtn,settingsBtn,roomBtn,homeBtn,apartmentBtn,reservationBtn,allReservationBtn);
   ArrayList<String> type =new ArrayList<>();
   type.add("Apartments");
   type.add("Rooms");
@@ -285,7 +286,9 @@ public class ReservationController implements Initializable {
                                 Double.valueOf(checkNull(primaryPriceTf.getText())),
                                 Double.valueOf(checkNull(discountTf.getText())),
                                 Double.valueOf(checkNull(totalPriceTf.getText())),
-                                Double.valueOf(getUserId(usernameText.getText()))
+                                Double.valueOf(getUserId(usernameText.getText())),
+                                checkNull(phoneTf.getText())
+
                                 ));
   rList.forEach(e -> System.out.println(e.getCreatedBy()));
   return rList;

@@ -13,6 +13,7 @@ public class ReservationData {
     double discount;
     double totalPrice;
     double createdBy;
+    String phone;
 
     public ReservationData(){}
 
@@ -34,7 +35,7 @@ public class ReservationData {
                 '}';
     }
 
-    public ReservationData(String clientName, String clientSurname, String clientId, String type, String envStaying, String reference, String checkIn, String checkOut, double primaryPrice, double discount, double totalPrice, double createdBy) {
+    public ReservationData(String clientName, String clientSurname, String clientId, String type, String envStaying, String reference, String checkIn, String checkOut, double primaryPrice, double discount, double totalPrice, double createdBy,String phone) {
         this.clientName = clientName;
         this.clientSurname = clientSurname;
         this.clientId = clientId;
@@ -47,6 +48,15 @@ public class ReservationData {
         this.discount = discount;
         this.totalPrice = totalPrice;
         this.createdBy = createdBy;
+        this.phone =phone;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
     }
 
     public String getClientName() {

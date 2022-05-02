@@ -50,7 +50,8 @@ public class AddRoomController implements Initializable {
     private Button homeBtn;
     @FXML
     private Button addBtn;
-
+    @FXML
+    private Button allReservationBtn;
     //Add Room
     @FXML
     private  TextField nameTf;
@@ -99,7 +100,7 @@ public class AddRoomController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle)  {
 
         setUserInformation(sd.getUsername());
-        s.sideBar(profileBtn,logoutBtn,settingsBtn,roomBtn,homeBtn,apartmentBtn,reservationBtn);
+        s.sideBar(profileBtn,logoutBtn,settingsBtn,roomBtn,homeBtn,apartmentBtn,reservationBtn,allReservationBtn);
         //Type Choice
         ArrayList<String> type =new ArrayList<>();
         type.add("single");
