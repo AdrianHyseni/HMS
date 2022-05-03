@@ -3,13 +3,13 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" styleClass="login-container" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" styleClass="login-container" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.hms.hmsfx.Controller.LoginController">
    <center>
       <VBox prefHeight="200.0" prefWidth="100.0" styleClass="login-stack" BorderPane.alignment="CENTER">
          <children>
             <Label id="login-label" text="Login" />
-            <TextField promptText="Usernam" styleClass="login-input" />
-            <PasswordField promptText="Password" styleClass="login-input" />
+            <TextField fx:id="usernameF" promptText="Usernam" styleClass="login-input" />
+            <PasswordField fx:id="passwordF" promptText="Password" styleClass="login-input" />
             <Button fx:id="loginBtn" mnemonicParsing="false" styleClass="login-btn" text="Login" />
          </children>
       </VBox>
