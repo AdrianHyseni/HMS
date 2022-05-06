@@ -4,7 +4,7 @@
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.hms.hmsfx.DashboardController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.hms.hmsfx.SettingsController">
    <top>
       <HBox prefHeight="100.0" prefWidth="200.0" styleClass="header" BorderPane.alignment="CENTER">
          <children>
@@ -32,13 +32,13 @@
                   </VBox>
                </children>
             </HBox>
-            <Button fx:id="roomBtnSide" mnemonicParsing="false" styleClass="menu-btn" text="Rooms" />
+            <Button fx:id="roomBtn" mnemonicParsing="false" styleClass="menu-btn" text="Rooms" />
             <Button fx:id="apartmentBtn" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" styleClass="menu-btn" text="Appartments" />
             <Button fx:id="reservationBtn" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" styleClass="menu-btn" text="Book" />
             <Button fx:id="allReservationBtn" layoutX="10.0" layoutY="131.0" mnemonicParsing="false" styleClass="menu-btn" text="Reservations" />
             <Button fx:id="costBtn" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" styleClass="menu-btn" text="Costs" />
             <Button fx:id="billBtn" layoutX="10.0" layoutY="35.0" mnemonicParsing="false" styleClass="menu-btn" text="Bills" />
-            <Button fx:id="settingsBtnSide" layoutX="10.0" layoutY="60.0" mnemonicParsing="false" styleClass="menu-btn" text="Settings" />
+            <Button fx:id="settingsBtn" layoutX="10.0" layoutY="60.0" mnemonicParsing="false" styleClass="menu-btn" text="Settings" />
          </children>
       </VBox>
    </left>
@@ -50,14 +50,13 @@
          <children>
             <HBox prefHeight="100.0" prefWidth="200.0" styleClass="dashboard-title-section">
                <children>
-                  <Label id="dashboard-label" text="Dashboard" />
+                  <Label id="dashboard-label" text="Settings" />
                </children>
             </HBox>
             <GridPane hgap="20.0" styleClass="dash-menu">
               <columnConstraints>
                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
               </columnConstraints>
               <rowConstraints>
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
@@ -66,68 +65,46 @@
                <children>
                   <VBox styleClass="dash-card">
                      <children>
-                        <Label id="card-title" text="Rooms" />
-                        <ImageView fitHeight="130.0" fitWidth="130.0" pickOnBounds="true" preserveRatio="true" styleClass="img-view">
+                        <Label id="card-title" text="Profile" />
+                        <ImageView fitHeight="90.0" fitWidth="90.0" pickOnBounds="true" preserveRatio="true" styleClass="img-view">
                            <image>
-                              <Image url="@assets/room.jpg" />
+                              <Image url="@assets/logo.png" />
                            </image>
                         </ImageView>
-                        <Button id="card-btn" fx:id="roomBtn" mnemonicParsing="false" text="Go To Rooms" />
+                        <Button id="card-btn" fx:id="editProfileBtn" mnemonicParsing="false" text="Edit Profile" />
                      </children>
                   </VBox>
                   <VBox layoutX="10.0" layoutY="-63.0" prefHeight="200.0" prefWidth="100.0" styleClass="dash-card" GridPane.columnIndex="1">
                      <children>
-                        <Label id="card-title" text="Apartments" />
+                        <Label id="card-title" text="New Apartment" />
                         <ImageView fitHeight="130.0" fitWidth="130.0" pickOnBounds="true" preserveRatio="true" styleClass="img-view">
                            <image>
                               <Image url="@assets/apartment.jpg" />
                            </image>
                         </ImageView>
-                        <Button id="card-btn" mnemonicParsing="false" text="Go To Apartments" />
-                     </children>
-                  </VBox>
-                  <VBox layoutX="10.0" layoutY="-63.0" prefHeight="200.0" prefWidth="100.0" styleClass="dash-card" GridPane.columnIndex="2">
-                     <children>
-                        <Label id="card-title" text="Reservations" />
-                        <ImageView fitHeight="130.0" fitWidth="130.0" pickOnBounds="true" preserveRatio="true" styleClass="img-view">
-                           <image>
-                              <Image url="@assets/booking.jpg" />
-                           </image>
-                        </ImageView>
-                        <Button id="card-btn" mnemonicParsing="false" text="Go To Reservations" />
-                     </children>
-                  </VBox>
-                  <VBox layoutX="10.0" layoutY="-63.0" prefHeight="200.0" prefWidth="100.0" styleClass="dash-card" GridPane.columnIndex="2" GridPane.rowIndex="1">
-                     <children>
-                        <Label id="card-title" text="Costs" />
-                        <ImageView fitHeight="130.0" fitWidth="130.0" pickOnBounds="true" preserveRatio="true" styleClass="img-view">
-                           <image>
-                              <Image url="@assets/calc.jpg" />
-                           </image>
-                        </ImageView>
-                        <Button id="card-btn" mnemonicParsing="false" text="Go To Costs" />
+                        <Button id="card-btn" fx:id="newApartmentBtn" mnemonicParsing="false" text="Add New Apartment" />
                      </children>
                   </VBox>
                   <VBox layoutX="10.0" layoutY="-63.0" prefHeight="200.0" prefWidth="100.0" styleClass="dash-card" GridPane.columnIndex="1" GridPane.rowIndex="1">
                      <children>
-                        <Label id="card-title" text="Bills" />
+                        <Label id="card-title" text="New Costs" />
                         <ImageView fitHeight="130.0" fitWidth="130.0" pickOnBounds="true" preserveRatio="true" styleClass="img-view">
                            <image>
                               <Image url="@assets/bills.jpg" />
                            </image>
                         </ImageView>
-                        <Button id="card-btn" mnemonicParsing="false" text="Go To Bills" />
+                        <Button id="card-btn" fx:id="addNewCost" mnemonicParsing="false" text="Add New Costs" />
                      </children>
                   </VBox>
                   <VBox layoutX="10.0" layoutY="-63.0" prefHeight="200.0" prefWidth="100.0" styleClass="dash-card" GridPane.columnIndex="0" GridPane.rowIndex="1">
                      <children>
-                        <Label id="card-title" text="Settings" />
+                        <Label id="card-title" text="New Room" />
                         <ImageView fitHeight="130.0" fitWidth="130.0" pickOnBounds="true" preserveRatio="true" styleClass="img-view">
                            <image>
-                              <Image url="@assets/settings.jpg" />
+                              <Image url="@assets/room.jpg" />
                            </image>
                         </ImageView>
-                        <Button id="card-btn" fx:id="settingsBtn" mnemonicParsing="false" text="Go To Settings" />
+                        <Button id="card-btn" fx:id="addNewRoom" mnemonicParsing="false" text="Add New Rooms" />
                      </children>
                   </VBox>
                </children>

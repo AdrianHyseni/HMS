@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.hms.hmsfx.Controller.ReservationController">
+   <top>
+      <HBox prefHeight="100.0" prefWidth="200.0" styleClass="header" BorderPane.alignment="CENTER">
+         <children>
+            <HBox prefHeight="100.0" prefWidth="200.0" styleClass="header-section">
+               <children>
+                  <Button fx:id="homeBtn" mnemonicParsing="false" styleClass="hamburger-btn" />
+                  <Label id="test" alignment="CENTER_RIGHT" contentDisplay="RIGHT" styleClass="title-label" text="Merlin Hotel" />
+               </children>
+            </HBox>
+         </children>
+      </HBox>
+   </top>
+   <left>
+      <VBox prefHeight="200.0" prefWidth="100.0" styleClass="left-menu" BorderPane.alignment="CENTER">
+         <children>
+            <HBox prefHeight="100.0" prefWidth="200.0" styleClass="profile-section">
+               <children>
+                  <Label styleClass="logo" />
+                  <VBox id="profile-section" prefHeight="200.0" prefWidth="100.0">
+                     <children>
+                        <Label fx:id="usernameText" styleClass="username" text="Username" />
+                        <Button fx:id="profileBtn" mnemonicParsing="false" styleClass="profile-btn" text="Profile" />
+                        <Button fx:id="logoutBtn" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" styleClass="profile-btn" text="Logout" />
+                     </children>
+                  </VBox>
+               </children>
+            </HBox>
+            <Button fx:id="roomBtn" mnemonicParsing="false" styleClass="menu-btn" text="Rooms" />
+            <Button fx:id="apartmentBtn" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" styleClass="menu-btn" text="Appartments" />
+            <Button fx:id="reservationBtn" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" styleClass="menu-btn" text="Book" />
+            <Button fx:id="allReservationBtn" layoutX="10.0" layoutY="131.0" mnemonicParsing="false" styleClass="menu-btn" text="Reservations" />
+            <Button fx:id="costBtn" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" styleClass="menu-btn" text="Costs" />
+            <Button fx:id="billBtn" layoutX="10.0" layoutY="35.0" mnemonicParsing="false" styleClass="menu-btn" text="Bills" />
+            <Button fx:id="settingsBtn" layoutX="10.0" layoutY="60.0" mnemonicParsing="false" styleClass="menu-btn" text="Settings" />
+         </children>
+      </VBox>
+   </left>
+   <bottom>
+      <Pane prefHeight="80.0" prefWidth="200.0" styleClass="footer" BorderPane.alignment="CENTER" />
+   </bottom>
+   <center>
+      <VBox prefHeight="200.0" prefWidth="100.0" styleClass="reservation-center" BorderPane.alignment="CENTER">
+         <children>
+            <HBox prefHeight="100.0" prefWidth="200.0" styleClass="reservation-label-section">
+               <children>
+                  <Label id="dashboard-label" text="Reservations" />
+               </children>
+            </HBox>
+            <HBox layoutX="10.0" layoutY="10.0" prefHeight="100.0" prefWidth="200.0" styleClass="reservation-input-section">
+               <children>
+                  <VBox prefHeight="200.0" prefWidth="100.0" styleClass="reservation-section-1">
+                     <children>
+                        <Label id="reservation-text" text="Client Name" />
+                        <TextField fx:id="nameTf" styleClass="reservation-input" />
+                        <Label id="reservation-text" layoutX="10.0" layoutY="10.0" text="Client Surname" />
+                        <TextField fx:id="surnameTf" layoutX="10.0" layoutY="28.0" styleClass="reservation-input" />
+                        <Label id="reservation-text" layoutX="10.0" layoutY="27.0" text="Client Phone Number" />
+                        <TextField fx:id="phoneTf" layoutX="10.0" layoutY="71.0" styleClass="reservation-input" />
+                        <Label id="reservation-text" layoutX="10.0" layoutY="44.0" text="Client ID" />
+                        <TextField fx:id="clientIdTf" layoutX="10.0" layoutY="114.0" styleClass="reservation-input" />
+                        <Label id="reservation-text" layoutX="10.0" layoutY="61.0" text="Type" />
+                        <ChoiceBox id="reservation-date" fx:id="typeCb" prefWidth="150.0" />
+                        <Label id="reservation-text" layoutX="10.0" layoutY="78.0" text="Room/Apartment Name" />
+                        <ChoiceBox id="reservation-date" fx:id="envCb" layoutX="10.0" layoutY="200.0" prefWidth="150.0" />
+                     </children>
+                  </VBox>
+                  <VBox prefHeight="200.0" prefWidth="100.0" styleClass="reservation-section-2">
+                     <children>
+                        <Label id="reservation-text" text="Reference" />
+                        <ChoiceBox id="reservation-date" fx:id="referenceCb" prefWidth="150.0" />
+                        <Label id="reservation-text" layoutX="10.0" layoutY="36.0" text="Check-in" />
+                        <DatePicker fx:id="checkInDc" styleClass="reservation-date" />
+                        <Label id="reservation-text" layoutX="10.0" layoutY="53.0" text="Check-out" />
+                        <DatePicker fx:id="checkOutDc" layoutX="10.0" layoutY="71.0" styleClass="reservation-date" />
+                        <Label id="reservation-text" layoutX="10.0" layoutY="71.0" text="Primary Price" />
+                        <Label id="reservation-text" fx:id="primaryPriceTf" layoutX="10.0" layoutY="140.0" text="Primary Price" />
+                        <Label id="reservation-text" layoutX="10.0" layoutY="88.0" text="Discount" />
+                        <TextField fx:id="discountTf" layoutX="10.0" layoutY="157.0" styleClass="reservation-input" />
+                        <Label id="reservation-text" fx:id="totalPriceL" layoutX="10.0" layoutY="106.0" text="Total Price" />
+                        <Label id="reservation-text" fx:id="totalPriceLabel" layoutX="10.0" layoutY="244.0" text="Total Price" />
+                     </children>
+                  </VBox>
+               </children>
+            </HBox>
+            <Button fx:id="reservBtn" alignment="CENTER" mnemonicParsing="false" styleClass="reservation-bt" text="Make The reservation" />
+         </children>
+      </VBox>
+   </center>
+</BorderPane>

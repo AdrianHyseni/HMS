@@ -139,11 +139,22 @@
     -fx-pref-width: 30px;
     -fx-pref-height: 30px;
     -fx-background-radius: 100%;
-    -fx-background-image: url("./assets/menu.png");
+    -fx-background-image: url("./assets/home.png");
     -fx-background-size: contain;
     -fx-background-color:transparent;
 
 }
+.hamburger-btn:hover {
+    -fx-alignment: top-left;
+    -fx-pref-width: 30px;
+    -fx-pref-height: 30px;
+    -fx-background-radius: 100%;
+    -fx-background-image: url("./assets/home.png");
+    -fx-background-color: rgba(255, 255, 255, 0.5);
+    -fx-background-size: contain;
+
+}
+
 
 .header-btn {
     -fx-pref-width: 150px;
@@ -172,7 +183,19 @@
     -fx-font-size: 16px;
 
 }
+.menu-btn:hover {
+    -fx-pref-width: 290px;
+    -fx-pref-height: 30px ;
+    -fx-background-color: rgba(255, 255, 255, 0.5);
+    -fx-background-radius: 3px;
+    -fx-border-width: 1px;
+    -fx-text-fill: #fff;
+    -fx-padding: 13px;
+    -fx-border-insets: 10px;
+    -fx-background-insets: 10px;
+    -fx-font-size: 16px;
 
+}
 
 .logo {
     -fx-background-image: url("assets/logo.png");
@@ -186,6 +209,16 @@
     -fx-pref-width: 200px;
     -fx-pref-height: 30px ;
     -fx-background-color: rgba(0, 0, 0, 0.20);
+    -fx-background-radius: 3px;
+    -fx-border-width: 1px;
+    -fx-text-fill: #fff;
+    -fx-font-size: 16px;
+}
+
+.profile-btn:hover {
+    -fx-pref-width: 200px;
+    -fx-pref-height: 30px ;
+    -fx-background-color: rgba(255, 255, 255, 0.5);
     -fx-background-radius: 3px;
     -fx-border-width: 1px;
     -fx-text-fill: #fff;
@@ -329,6 +362,10 @@
     -fx-alignment: center;
     -fx-background-radius: 30px;
 }
+#room-checkbox-input{
+    -fx-text-fill: #fff;
+    -fx-alignment: center;
+}
 
 .text-area-room{
     -fx-pref-width: 90px;
@@ -371,7 +408,7 @@
 }
 
 #search-room {
-    -fx-pref-width: 400px;
+    -fx-pref-width: 250px;
     -fx-background-color:  rgba(255, 255, 255, 0.5);
     -fx-text-fill: rgba(5, 68, 94);
     -fx-alignment: center;
@@ -422,4 +459,251 @@
     -fx-background-insets: 10px;
     -fx-background-radius: 40px;
     -fx-font-size: 16px;
+}
+
+/* Profile */
+
+.center-profile {
+    -fx-background-image: url("assets/loginBG.png");
+
+}
+
+.profile-card {
+    -fx-background-color:   rgba(5, 68, 94,0.6);
+    -fx-text-fill: #fff;
+    -fx-alignment: center;
+    -fx-background-radius: 30px;
+    -fx-padding: 180px;
+    -fx-spacing: 10px;
+
+
+}
+
+#center-input-profile{
+    -fx-alignment: center;
+    -fx-pref-width: 200px;
+
+
+
+}
+
+.input1-profile {
+    -fx-background-color:  rgba(255, 255, 255, 0.8);
+    -fx-text-fill: rgba(5, 68, 94);
+    -fx-alignment: center;
+    -fx-background-radius: 30px;
+    -fx-hgap: 30px;
+
+}
+
+.input2-profile{
+    -fx-background-color:  rgba(255, 255, 255, 0.8);
+    -fx-text-fill: rgba(5, 68, 94);
+    -fx-alignment: center;
+    -fx-background-radius: 30px;
+    -fx-pref-height: 30px;
+}
+
+.credential1-profile {
+    -fx-spacing: 30px;
+}
+
+.profile-text{
+    -fx-text-fill: #fff;
+    -fx-font-size: 20px;
+}
+
+.logo-profile{
+    -fx-background-image: url("assets/logo.png");
+    -fx-font-size: 80px;
+    -fx-pref-width: 110px;
+    -fx-pref-height: 110px;
+    -fx-background-size: contain;
+    -fx-background-repeat: no-repeat;
+}
+
+.button-combo{
+    -fx-spacing: 30px;
+}
+
+.button1-profile{
+    -fx-text-fill: #fff;
+    -fx-background-color: rgba(5, 68, 94);
+    -fx-pref-width: 90px;
+    -fx-background-radius: 30px;
+    -fx-font-size: 16px;
+
+}
+
+.button2-profile{
+    -fx-text-fill: #fff;
+    -fx-background-color: #189AB4;
+    -fx-pref-width: 90px;
+    -fx-background-radius: 30px;
+    -fx-font-size: 16px;
+
+}
+
+#room-table {
+    -fx-pref-height: 500px;
+    -fx-font-size: 12px;
+}
+
+#room-table col {
+    -fx-pref-width: 80px;
+}
+
+
+/*Room list Styling*/
+.room-list-center{
+    -fx-pref-height: 600px;
+    -fx-pref-width: 300px;
+    -fx-alignment: center;
+    -fx-spacing: 20px;
+    -fx-padding: 40px;
+
+}
+.room-list-table-section{
+    -fx-padding: 20px;
+    -fx-background-color: rgba(5, 68, 94,0.6);
+    -fx-background-radius: 20px;
+    -fx-pref-height: 600px;
+    -fx-pref-width: 300px;
+    -fx-alignment: center;
+}
+
+.room-list-label-section{
+    -fx-padding: 20px;
+    -fx-background-color: #75E6DA;
+    -fx-background-radius: 20px;
+    -fx-pref-height: 200px;
+    -fx-pref-width: 300px;
+    -fx-alignment: center;
+    -fx-text-alignment: center;
+}
+.room-list-controll-section{
+    -fx-alignment: center;
+    -fx-spacing: 20px;
+    -fx-pref-width: 300px;
+
+}
+.table-controller{}
+.room-list-btn1{
+    -fx-text-fill: #fff;
+    -fx-background-color: rgba(5, 68, 94);
+    -fx-pref-width: 150px;
+    -fx-background-radius: 30px;
+    -fx-font-size: 16px;
+}
+.room-list-btn2{
+    -fx-text-fill: #fff;
+    -fx-background-color: rgba(6, 40, 140);
+    -fx-pref-width: 150px;
+    -fx-background-radius: 30px;
+    -fx-font-size: 16px;
+}
+.room-list-search{
+    -fx-pref-width: 600px;
+    -fx-pref-height: 30px;
+    -fx-background-color:  rgba(255, 255, 255, 0.85);
+    -fx-text-fill: rgba(5, 68, 94);
+    -fx-alignment: center;
+    -fx-background-radius: 30px;
+    -fx-font-size: 16px;
+
+}
+
+.apartment-list-center{
+    -fx-background-image: url("assets/apartment.jpg");
+    -fx-background-size: cover;
+    -fx-background-repeat: no-repeat;
+    -fx-pref-width: 600px;
+    -fx-padding: 40px;
+    -fx-spacing: 20px;
+}
+
+.reservation-center{
+    -fx-background-image: url("assets/holiday.jpg");
+    -fx-background-size: cover;
+    -fx-background-repeat: no-repeat;
+    -fx-alignment: top-center;
+    -fx-padding: 40px;
+    -fx-spacing: 30px;
+}
+.reservation-label-section{
+    -fx-padding: 20px;
+    -fx-background-color: rgba(177, 212, 224, 0.7);
+    -fx-background-radius: 20px;
+    -fx-pref-height: 80px;
+    -fx-pref-width: 300px;
+    -fx-alignment: center;
+    -fx-text-alignment: center;
+}
+.reservation-input-section{
+    -fx-background-color: rgba(5, 68, 94, 0.9);
+    -fx-background-radius: 20px;
+    -fx-pref-height: 600px;
+    -fx-pref-width: 300px;
+    -fx-alignment: center;
+    -fx-text-alignment: center;
+    -fx-spacing: 30px;
+}
+.reservation-section-1{
+    -fx-padding: 20px;
+    -fx-pref-height: 400px;
+    -fx-pref-width: 300px;
+    -fx-alignment: center;
+    -fx-text-alignment: center;
+    -fx-spacing: 10px;
+}
+#reservation-text{
+    -fx-text-fill: #B1D4E0;
+}
+.reservation-section-2{
+    -fx-padding: 20px;
+    -fx-pref-height: 400px;
+    -fx-pref-width: 300px;
+    -fx-alignment: center;
+    -fx-text-alignment: center;
+    -fx-spacing: 10px;
+}
+.reservation-input{
+    -fx-alignment: center;
+    -fx-pref-width: 200px;
+    -fx-pref-height: 25px;
+
+    -fx-background-color: rgba(177, 212, 224, 0.7);
+    -fx-border-radius: 40px;
+
+    -fx-font-style: normal;
+    -fx-font-size: 14px;
+
+    -fx-text-fill: #0C2D48;
+}
+
+#reservation-date{
+    -fx-pref-width: 300px;
+    -fx-pref-height: 40px;
+    -fx-background-color: rgba(177, 212, 224, 0.7);
+    -fx-border-radius: 40px;
+}
+
+.reservation-bt
+{
+    -fx-pref-width: 200px;
+    -fx-background-color: #050A30;
+    -fx-background-radius: 20px;
+    -fx-text-fill: #fff;
+    -fx-font-size: 18px;
+
+}
+
+.reservation-bt:hover
+{
+    -fx-pref-width: 200px;
+    -fx-background-color: #0000FF;
+    -fx-background-radius: 20px;
+    -fx-text-fill: #fff;
+    -fx-font-size: 18px;
+
 }

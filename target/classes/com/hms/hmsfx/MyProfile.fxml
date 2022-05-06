@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.hms.hmsfx.MyProfileController">
+   <top>
+      <HBox prefHeight="100.0" prefWidth="200.0" styleClass="header" BorderPane.alignment="CENTER">
+         <children>
+            <HBox prefHeight="100.0" prefWidth="200.0" styleClass="header-section">
+               <children>
+                  <Button fx:id="homeBtn" mnemonicParsing="false" styleClass="hamburger-btn" />
+                  <Label id="test" alignment="CENTER_RIGHT" contentDisplay="RIGHT" styleClass="title-label" text="Merlin Hotel" />
+               </children>
+            </HBox>
+         </children>
+      </HBox>
+   </top>
+   <left>
+      <VBox prefHeight="200.0" prefWidth="100.0" styleClass="left-menu" BorderPane.alignment="CENTER">
+         <children>
+            <HBox prefHeight="100.0" prefWidth="200.0" styleClass="profile-section">
+               <children>
+                  <Label styleClass="logo" />
+                  <VBox id="profile-section" prefHeight="200.0" prefWidth="100.0">
+                     <children>
+                        <Label fx:id="usernameText" styleClass="username" text="Username" />
+                        <Button fx:id="profileBtn" mnemonicParsing="false" styleClass="profile-btn" text="Profile" />
+                        <Button fx:id="logoutBtn" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" styleClass="profile-btn" text="Logout" />
+                     </children>
+                  </VBox>
+               </children>
+            </HBox>
+            <Button fx:id="roomBtn" mnemonicParsing="false" styleClass="menu-btn" text="Rooms" />
+            <Button fx:id="apartmentBtn" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" styleClass="menu-btn" text="Appartments" />
+            <Button fx:id="reservationBtn" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" styleClass="menu-btn" text="Book" />
+            <Button fx:id="allReservationBtn" layoutX="10.0" layoutY="131.0" mnemonicParsing="false" styleClass="menu-btn" text="Reservations" />
+            <Button fx:id="costBtn" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" styleClass="menu-btn" text="Costs" />
+            <Button fx:id="billBtn" layoutX="10.0" layoutY="35.0" mnemonicParsing="false" styleClass="menu-btn" text="Bills" />
+            <Button fx:id="settingsBtn" layoutX="10.0" layoutY="60.0" mnemonicParsing="false" styleClass="menu-btn" text="Settings" />
+         </children>
+      </VBox>
+   </left>
+   <bottom>
+      <Pane prefHeight="80.0" prefWidth="200.0" styleClass="footer" BorderPane.alignment="CENTER" />
+   </bottom>
+   <center>
+      <BorderPane prefHeight="200.0" prefWidth="200.0" styleClass="center-profile" BorderPane.alignment="CENTER">
+         <center>
+            <VBox prefHeight="200.0" prefWidth="80.0" styleClass="profile-card" BorderPane.alignment="CENTER">
+               <children>
+                  <Label styleClass="logo-profile" />
+                  <HBox id="center-input-profile" prefHeight="100.0" prefWidth="200.0" styleClass="credential1-profile">
+                     <children>
+                        <VBox id="center-input-profile" prefHeight="200.0" prefWidth="100.0">
+                           <children>
+                              <Label styleClass="profile-text" text="Name" />
+                              <TextField fx:id="nameTF" styleClass="input1-profile" />
+                           </children>
+                        </VBox>
+                        <VBox id="center-input-profile" layoutX="10.0" layoutY="10.0" prefHeight="200.0" prefWidth="100.0">
+                           <children>
+                              <Label styleClass="profile-text" text="Surname" />
+                              <TextField fx:id="surnameTF" styleClass="input1-profile" />
+                           </children>
+                        </VBox>
+                     </children></HBox>
+                  <VBox id="center-input-profile" prefHeight="200.0" prefWidth="100.0">
+                     <children>
+                        <Label styleClass="profile-text" text="Username" />
+                        <TextField fx:id="usernameTF" prefWidth="100.0" styleClass="input2-profile" />
+                     </children>
+                  </VBox>
+                  <VBox id="center-input-profile" layoutX="10.0" layoutY="48.0" prefHeight="200.0" prefWidth="100.0">
+                     <children>
+                        <Label styleClass="profile-text" text="Password" />
+                        <PasswordField fx:id="passF" prefWidth="200.0" styleClass="input2-profile" />
+                     </children></VBox>
+                  <HBox id="center-input-profile" prefHeight="100.0" prefWidth="200.0" styleClass="button-combo">
+                     <children>
+                        <Button fx:id="updateBtn" mnemonicParsing="false" styleClass="button1-profile" text="Update" />
+                        <Button fx:id="showBtn" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" styleClass="button2-profile" text="Show" />
+                     </children>
+                  </HBox>
+               </children></VBox>
+         </center>
+         <top>
+            <AnchorPane prefHeight="30.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
+         </top>
+         <left>
+            <AnchorPane prefHeight="200.0" prefWidth="30.0" BorderPane.alignment="CENTER" />
+         </left>
+         <right>
+            <AnchorPane prefHeight="200.0" prefWidth="30.0" BorderPane.alignment="CENTER" />
+         </right>
+         <bottom>
+            <AnchorPane prefHeight="30.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
+         </bottom>
+      </BorderPane>
+   </center>
+</BorderPane>
