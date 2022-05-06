@@ -61,7 +61,7 @@ public class ReservationController implements Initializable {
     @FXML
     private DatePicker checkOutDc;
     @FXML
-    private Label totalPriceTf;
+    private Label totalPriceLabel;
     @FXML
     private TextField discountTf;
     @FXML
@@ -139,7 +139,7 @@ public class ReservationController implements Initializable {
      if(t1.matches("[0-9]{1,13}(\\\\.[0-9]*)?")) {
       int days = checkOutDc.getValue().getDayOfYear() - checkInDc.getValue().getDayOfYear();
       double price = Double.parseDouble(calculateTotalPrice(primaryPriceTf.getText(), t1, days));
-      totalPriceTf.setText(String.valueOf(price));
+      totalPriceLabel.setText(String.valueOf(price));
      }else {
       Alert alert = new Alert(Alert.AlertType.ERROR);
       alert.setTitle("Error discount");
@@ -217,8 +217,8 @@ public class ReservationController implements Initializable {
  }
  public void makeReservation() throws SQLException {
    reserveData();
-   String insertRoomsQuery = "INSERT INTO  booking(type, room_fk, check_in, check_out, totalPrice, created_by, clientName, clientSurname, clientId, clientPhone, dicount, primaryPrice)VALUES (?,?,?,?,?,?,?,?,?,?,?,?)";
-   String insertAptQuery =   "INSERT INTO  booking(type, apartment_fk, check_in, check_out, totalPrice, created_by, clientName, clientSurname, clientId, clientPhone, dicount, primaryPrice) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)";
+   String insertRoomsQuery = "INSERT INTO  booking(type, room_fk, check_in, check_out, totalPrice, created_by, clientName, clientSurname, clientId, clientPhone, dicount, primaryPrice,reference)VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)";
+   String insertAptQuery =   "INSERT INTO  booking(type, apartment_fk, check_in, check_out, totalPrice, created_by, clientName, clientSurname, clientId, clientPhone, dicount, primaryPrice,reference) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)";
 
 
    ArrayList<ReservationData> list = reserveData();
@@ -232,7 +232,8 @@ public class ReservationController implements Initializable {
       test(r,preparedStatement4);
 
 
-     }else if(typeCb.getSelectionModel().getSelectedItem().equals("Apartments")) {
+     }
+     else if(typeCb.getSelectionModel().getSelectedItem().equals("Apartments")) {
       preparedStatement1 = con.prepareStatement(insertAptQuery);
       preparedStatement1.setString(1,r.getType());
       preparedStatement1.setInt(2, getApartmentId(r.getEnvStaying()));
@@ -262,15 +263,15 @@ public class ReservationController implements Initializable {
  private void test(ReservationData r, PreparedStatement p) throws SQLException {
   p.setObject(3,r.getCheckIn());
   p.setObject(4, r.getCheckOut());
-  p.setObject(5, r.getPrimaryPrice());
+  p.setObject(5, r.getTotalPrice());
   p.setObject(6, getUserId(usernameText.getText()));
   p.setObject(7, r.getClientName());
   p.setObject(8, r.getClientSurname());
   p.setObject(9, r.getClientId());
-  p.setObject(10, phoneTf.getText());
-  p.setObject(11, discountTf.getText());
-  p.setObject(12, primaryPriceTf.getText());
-
+  p.setObject(10,r.getPhone());
+  p.setObject(11, r.getDiscount());
+  p.setObject(12, r.getPrimaryPrice());
+  p.setObject(13,r.getReference());
   p.executeUpdate();
  }
  public ArrayList<ReservationData> reserveData() throws SQLException {
@@ -285,7 +286,7 @@ public class ReservationController implements Initializable {
                                 checkEndDate(checkInDc,checkOutDc),
                                 Double.valueOf(checkNull(primaryPriceTf.getText())),
                                 Double.valueOf(checkNull(discountTf.getText())),
-                                Double.valueOf(checkNull(totalPriceTf.getText())),
+                                Double.valueOf(calculateTotalPrice(totalPriceLabel.getText(),discountTf.getText(),Integer.valueOf(discountTf.getText()))),
                                 Double.valueOf(getUserId(usernameText.getText())),
                                 checkNull(phoneTf.getText())
 

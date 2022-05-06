@@ -9,7 +9,7 @@ public class DatabaseConnection {
     public Connection getConnection(){
         String databaseName     = "hms";
         String databaseUser     = "root";
-        String databasePassword = "rootroot";
+        String databasePassword = "root";
 
         String url = "jdbc:mysql://localhost/"+ databaseName;
 

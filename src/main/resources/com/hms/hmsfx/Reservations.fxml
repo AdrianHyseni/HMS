@@ -83,7 +83,7 @@
                         <Label id="reservation-text" layoutX="10.0" layoutY="88.0" text="Discount" />
                         <TextField fx:id="discountTf" layoutX="10.0" layoutY="157.0" styleClass="reservation-input" />
                         <Label id="reservation-text" fx:id="totalPriceL" layoutX="10.0" layoutY="106.0" text="Total Price" />
-                        <Label id="reservation-text" fx:id="totalPriceTf" layoutX="10.0" layoutY="244.0" text="Total Price" />
+                        <Label id="reservation-text" fx:id="totalPriceLabel" layoutX="10.0" layoutY="244.0" text="Total Price" />
                      </children>
                   </VBox>
                </children>
