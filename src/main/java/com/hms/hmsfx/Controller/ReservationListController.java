@@ -150,10 +150,8 @@ public class ReservationListController implements Initializable {
     }
     //Display Room on the table
     private void showData(){
-
         getData();
-     reservationTable.setItems(reservationData);
-
+        reservationTable.setItems(reservationData);
 
     }
     public void filterData() {
@@ -178,6 +176,9 @@ public class ReservationListController implements Initializable {
                         return true;
                     }
                     else if(reservationSearchModel.getClientId().toLowerCase().indexOf(searchKeyword) > -1){
+                        return true;
+                    }
+                    else if(reservationSearchModel.getEnvStaying().toLowerCase().indexOf(searchKeyword) > -1){
                         return true;
                     }
                     else {
@@ -229,7 +230,6 @@ public class ReservationListController implements Initializable {
             reservationData.add(new ReservationData(clientName,surname,clientId,type,envName,reference,checkIn,checkOut,primaryPrice,discount,totalPrice,createdBy,phone));
         }
     }
-
     public void getData() {
         try{
             String query = "SELECT * FROM booking";
@@ -284,25 +284,22 @@ public class ReservationListController implements Initializable {
             e.printStackTrace();
         }
     }
-
     private void getReservationData() throws SQLException {
         reservationData();
 
         setCellTable();
         reservationTable.setItems(reservationData);
     }
-
     public void refresh(){
         reservationData.clear();
 
     }
-
     public String getRoomName(int id ) throws SQLException{
         String name ="";
         String query = "SELECT name from rooms where id=?";
         preparedStatement1= con.prepareStatement(query);
-        preparedStatement.setInt(1,id);
-        resultSet = preparedStatement.executeQuery();
+        preparedStatement1.setInt(1,id);
+        resultSet = preparedStatement1.executeQuery();
         while(resultSet.next()){
             name = resultSet.getString("name");
         }
