@@ -274,6 +274,14 @@ public class ReservationController implements Initializable {
   p.executeUpdate();
  }
  public ArrayList<ReservationData> reserveData() throws SQLException {
+  if(checkInDc == null || checkOutDc == null){
+   Alert alert = new Alert(Alert.AlertType.ERROR);
+   alert.setContentText("There was a problem!Date Fields must not be empty!");
+   alert.setTitle("Fields Error");
+   alert.show();
+   return null;
+  }else{
+  int days = checkOutDc.getValue().getDayOfYear() - checkInDc.getValue().getDayOfYear();
   ArrayList<ReservationData> rList = new ArrayList<>();
   rList.add(new ReservationData(checkNull(nameTf.getText()),
                                 checkNull(surnameTf.getText()),
@@ -285,13 +293,15 @@ public class ReservationController implements Initializable {
                                 checkEndDate(checkInDc,checkOutDc),
                                 Double.valueOf(checkNull(primaryPriceTf.getText())),
                                 Double.valueOf(checkNull(discountTf.getText())),
-                                Double.valueOf(checkNull(totalPriceTf.getText())),
+                                Double.valueOf(calculateTotalPrice(totalPriceTf.getText(),discountTf.getText(),days)),
                                 Double.valueOf(getUserId(usernameText.getText())),
                                 checkNull(phoneTf.getText())
 
                                 ));
-  rList.forEach(e -> System.out.println(e.getCreatedBy()));
-  return rList;
+   rList.forEach(e -> System.out.println(e.getCreatedBy()));
+   return rList;
+  }
+
  }
  public String checkStartDate(DatePicker startDate, DatePicker endDate){
   LocalDateTime now = LocalDateTime.now();
