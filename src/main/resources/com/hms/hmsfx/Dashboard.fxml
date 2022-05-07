@@ -83,7 +83,7 @@
                               <Image url="@assets/apartment.jpg" />
                            </image>
                         </ImageView>
-                        <Button id="card-btn" mnemonicParsing="false" text="Go To Apartments" />
+                        <Button fx:id="apartmentListBtn" id="card-btn" mnemonicParsing="false" text="Go To Apartments" />
                      </children>
                   </VBox>
                   <VBox layoutX="10.0" layoutY="-63.0" prefHeight="200.0" prefWidth="100.0" styleClass="dash-card" GridPane.columnIndex="2">
@@ -94,7 +94,7 @@
                               <Image url="@assets/booking.jpg" />
                            </image>
                         </ImageView>
-                        <Button id="card-btn" mnemonicParsing="false" text="Go To Reservations" />
+                        <Button id="card-btn" fx:id="addReservationBtn" mnemonicParsing="false" text="Go To Reservations" />
                      </children>
                   </VBox>
                   <VBox layoutX="10.0" layoutY="-63.0" prefHeight="200.0" prefWidth="100.0" styleClass="dash-card" GridPane.columnIndex="2" GridPane.rowIndex="1">
@@ -105,7 +105,7 @@
                               <Image url="@assets/calc.jpg" />
                            </image>
                         </ImageView>
-                        <Button id="card-btn" mnemonicParsing="false" text="Go To Costs" />
+                        <Button id="card-btn" fx:id="goToCostsBtn" mnemonicParsing="false" text="Go To Costs" />
                      </children>
                   </VBox>
                   <VBox layoutX="10.0" layoutY="-63.0" prefHeight="200.0" prefWidth="100.0" styleClass="dash-card" GridPane.columnIndex="1" GridPane.rowIndex="1">

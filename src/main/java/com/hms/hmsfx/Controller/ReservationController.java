@@ -87,6 +87,8 @@ public class ReservationController implements Initializable {
     private Button  settingsBtn;
     @FXML
     private Button homeBtn;
+    @FXML
+    private Button costBtn;
 
 
  @Override
@@ -94,7 +96,7 @@ public class ReservationController implements Initializable {
 
   setUserInformation(sd.getUsername());
   usernameText.setText("test");
-  s.sideBar(profileBtn,logoutBtn,settingsBtn,roomBtn,homeBtn,apartmentBtn,reservationBtn,allReservationBtn);
+  s.sideBar(profileBtn,logoutBtn,settingsBtn,roomBtn,homeBtn,apartmentBtn,reservationBtn,allReservationBtn,costBtn);
   ArrayList<String> type =new ArrayList<>();
   type.add("Apartments");
   type.add("Rooms");

@@ -6,9 +6,19 @@ public class CostData {
     String name;
     String date;
     Double costPrice;
+    String billName;
+
 
     public CostData() {
 
+    }
+
+    public CostData(String type, String name, String date, Double costPrice,String billName) {
+        this.type = type;
+        this.name = name;
+        this.date = date;
+        this.costPrice = costPrice;
+        this.billName = billName;
     }
 
     public CostData(String type, String name, String date, Double costPrice) {
@@ -16,6 +26,14 @@ public class CostData {
         this.name = name;
         this.date = date;
         this.costPrice = costPrice;
+    }
+
+    public String getBillName() {
+        return billName;
+    }
+
+    public void setBillName(String billName) {
+        this.billName = billName;
     }
 
     public String getType() {

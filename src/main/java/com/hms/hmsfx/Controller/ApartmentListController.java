@@ -73,6 +73,8 @@ public class ApartmentListController implements Initializable {
     //Search Field
     @FXML
     private TextField searchField;
+    @FXML
+    private Button costsBtn;
 
 
     SideBar s = new SideBar();
@@ -83,7 +85,7 @@ public class ApartmentListController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle)  {
 
         setUserInformation(sd.getUsername());
-        s.sideBar(profileBtn,logoutBtn,settingsBtn,roomBtn,homeBtn,apartmentBtn,reservationBtn,allReservationBtn);
+        s.sideBar(profileBtn,logoutBtn,settingsBtn,roomBtn,homeBtn,apartmentBtn,reservationBtn,allReservationBtn,costsBtn);
         //Type Choice
         filterData();
         showAllBtn.setOnAction(new EventHandler<ActionEvent>() {

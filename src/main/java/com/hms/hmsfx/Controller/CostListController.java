@@ -1,9 +1,8 @@
 package com.hms.hmsfx.Controller;
 
 import com.hms.hmsfx.DatabaseConnection;
-import com.hms.hmsfx.HMSFunctions;
 import com.hms.hmsfx.SideBar;
-import com.hms.hmsfx.data.RoomData;
+import com.hms.hmsfx.data.CostData;
 import com.hms.hmsfx.data.SystemData;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -21,19 +20,24 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.*;
+import java.util.ResourceBundle;
+import java.util.concurrent.atomic.AtomicReference;
 
-public class RoomListController implements Initializable {
+public class CostListController implements Initializable {
 
-    ObservableList<RoomData> roomData =FXCollections.observableArrayList();
+    ObservableList<CostData> costData =FXCollections.observableArrayList();
     SystemData sd = new SystemData();
     DatabaseConnection connection = new DatabaseConnection();
     Connection con = connection.getConnection();
     ResultSet resultSet = null;
+    ResultSet resultSet1 = null;
     PreparedStatement preparedStatement = null;
+    PreparedStatement preparedStatement2 = null;
 
     @FXML
     private Label usernameText;
+    @FXML
+    private Label costLabel;
     @FXML
     private Button profileBtn;
     @FXML
@@ -47,33 +51,32 @@ public class RoomListController implements Initializable {
     @FXML
     private Button homeBtn;
     @FXML
-    private Button freeRoomsBtn;
-    @FXML
     private Button showAllBtn;
+    @FXML
+    private Button reservationBtn;
     @FXML
     private Button allReservationBtn;
 
     //Table
     @FXML
-    private TableView<RoomData> roomTable;
+    private TableView<CostData> costTable;
     @FXML
-    private TableColumn<RoomData,String> nameCol;
+    private TableColumn<CostData,?> titleCol;
     @FXML
-    private TableColumn<RoomData,String> descriptionCol;
+    private TableColumn<CostData,?> billNameCol;
     @FXML
-    private TableColumn<RoomData,Integer> priceCol;
+    private TableColumn<CostData,?> priceCostCol;
     @FXML
-    private TableColumn<RoomData,String> typeCol;
+    private TableColumn<CostData,?> typeCol;
     @FXML
-    private TableColumn<RoomData,Boolean> statusCol;
+    private TableColumn<CostData,?> dateCol;
     @FXML
-    private Button reservationBtn;
+    private Button costBtn;
+
 
     //Search Field
     @FXML
     private TextField searchField;
-    @FXML
-    private Button costBtn;
 
 
     SideBar s = new SideBar();
@@ -87,6 +90,7 @@ public class RoomListController implements Initializable {
         s.sideBar(profileBtn,logoutBtn,settingsBtn,roomBtn,homeBtn,apartmentBtn,reservationBtn,allReservationBtn,costBtn);
         //Type Choice
         filterData();
+        calculateTotalCost();
         showAllBtn.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
@@ -97,12 +101,7 @@ public class RoomListController implements Initializable {
                 }
             }
         });
-        freeRoomsBtn.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                getFreeRooms();
-            }
-        });
+
 
 
 
@@ -116,49 +115,56 @@ public class RoomListController implements Initializable {
 
     //divide each data on the right column
     private void setCellTable(){
-        nameCol.setCellValueFactory(new PropertyValueFactory<>("roomName"));
-        descriptionCol.setCellValueFactory(new PropertyValueFactory<>("roomDesc"));
-        priceCol.setCellValueFactory(new PropertyValueFactory<>("roomPrice"));
-        typeCol.setCellValueFactory(new PropertyValueFactory<>("roomType"));
-        statusCol.setCellValueFactory(new PropertyValueFactory<>("roomStatus"));
+        typeCol.setCellValueFactory(new PropertyValueFactory<>("type"));
+        titleCol.setCellValueFactory(new PropertyValueFactory<>("name"));
+        priceCostCol.setCellValueFactory(new PropertyValueFactory<>("costPrice"));
+        dateCol.setCellValueFactory(new PropertyValueFactory<>("date"));
+        billNameCol.setCellValueFactory(new PropertyValueFactory<>("billName"));
+
     }
     //Display Room on the table
     private void showData(){
 
         getData();
-        roomTable.setItems(roomData);
+        costTable.setItems(costData);
 
 
     }
     public void filterData() {
         try{
-            String query = "SELECT * FROM ROOMS";
+            String query = "SELECT * FROM costs";
             preparedStatement = con.prepareStatement(query);
             resultSet = preparedStatement.executeQuery();
             while(resultSet.next()){
 
 
-                int id = resultSet.getInt("id");
-                String name = resultSet.getString("name");
-                String description = resultSet.getString("description");
-                int price = resultSet.getInt("price");
+                String title = resultSet.getString("title");
                 String type = resultSet.getString("type");
-                Boolean status = resultSet.getBoolean("status");
-                roomData.add(new RoomData(id,name,description,price,type,status));
+                Double costInEu = resultSet.getDouble("costInEu");
+                String date = resultSet.getString("date");
+                int costBillFk = resultSet.getInt("cost_bill_fk");
+
+                costData.add(new CostData(type,title,date,costInEu,getBillName(costBillFk)));
             }
-            FilteredList<RoomData> filteredRoom = new FilteredList<>(roomData, b -> true);
+            FilteredList<CostData> filteredApartment = new FilteredList<>(costData, b -> true);
             //Search Field
             searchField.textProperty().addListener((observable, oldValue, newValue) -> {
-                filteredRoom.setPredicate(roomSearchModel -> {
+                filteredApartment.setPredicate(apartmentSearchModel -> {
                     String searchKeyword = newValue.toLowerCase();
                     if(newValue.isEmpty() || newValue.isBlank() || newValue == null){
                         return true;
                     }
 
-                    if(roomSearchModel.getRoomName().toLowerCase().indexOf(searchKeyword) > -1){
+                    if(apartmentSearchModel.getBillName().toLowerCase().indexOf(searchKeyword) > -1){
                         return true;
                     }
-                    else if(roomSearchModel.getRoomType().toLowerCase().indexOf(searchKeyword) > -1){
+                    else if(apartmentSearchModel.getDate().toLowerCase().indexOf(searchKeyword) > -1){
+                        return true;
+                    }
+                    else if(apartmentSearchModel.getName().toLowerCase().indexOf(searchKeyword) > -1){
+                        return true;
+                    }
+                    else if(apartmentSearchModel.getType().toLowerCase().indexOf(searchKeyword) > -1){
                         return true;
                     }
                     else {
@@ -168,10 +174,10 @@ public class RoomListController implements Initializable {
                 });
             });
             setCellTable();
-            roomTable.setItems(roomData);
-            SortedList<RoomData> sortedRoom = new SortedList<>(filteredRoom);
-            sortedRoom.comparatorProperty().bind(roomTable.comparatorProperty());
-            roomTable.setItems(sortedRoom);
+            costTable.setItems(costData);
+            SortedList<CostData> sortedCostLis = new SortedList<>(filteredApartment);
+            sortedCostLis.comparatorProperty().bind(costTable.comparatorProperty());
+            costTable.setItems(sortedCostLis);
 
         }catch(SQLException e){
             e.printStackTrace();
@@ -181,56 +187,47 @@ public class RoomListController implements Initializable {
     }
     public void getData() {
         try{
-            String query = "SELECT * FROM ROOMS";
+            String query = "SELECT * FROM apartments";
             preparedStatement = con.prepareStatement(query);
             resultSet = preparedStatement.executeQuery();
             while(resultSet.next()){
 
-
-                int id = resultSet.getInt("id");
-                String name = resultSet.getString("name");
-                String description = resultSet.getString("description");
-                int price = resultSet.getInt("price");
+                String title = resultSet.getString("title");
                 String type = resultSet.getString("type");
-                Boolean status = resultSet.getBoolean("status");
-                roomData.add(new RoomData(id,name,description,price,type,status));
+                Double costInEu = resultSet.getDouble("costInEu");
+                String date = resultSet.getString("date");
+                int costBillFk = resultSet.getInt("cost_bill_fk");
+
+                costData.add(new CostData(type,title,date,costInEu,getBillName(costBillFk)));
             }
             setCellTable();
-            roomTable.setItems(roomData);
+            costTable.setItems(costData);
         }catch(SQLException e){
             e.printStackTrace();
         }
 
-    }
-    public void getFreeRooms(){
-        try{
-            String query = "SELECT * FROM ROOMS WHERE status=true ";
-            preparedStatement = con.prepareStatement(query);
-            resultSet = preparedStatement.executeQuery();
-            roomData.clear();
-            while(resultSet.next()){
-
-
-                int id = resultSet.getInt("id");
-                String name = resultSet.getString("name");
-                String description = resultSet.getString("description");
-                int price = resultSet.getInt("price");
-                String type = resultSet.getString("type");
-                Boolean status = resultSet.getBoolean("status");
-                roomData.add(new RoomData(id,name,description,price,type,status));
-            }
-
-            setCellTable();
-            roomTable.setItems(roomData);
-
-
-        }catch(SQLException e){
-            e.printStackTrace();
-        }
     }
     public void refresh(){
-        roomData.clear();
+        costData.clear();
         filterData();
+    }
+    public void  calculateTotalCost(){
+        AtomicReference<Double> tc = new AtomicReference<>((double) 0);
+        costData.forEach(e -> {
+            tc.updateAndGet(v -> new Double((double) (v + e.getCostPrice())));
+        });
+        costLabel.setText(String.valueOf(tc));
+    }
+    public String getBillName(int i) throws SQLException {
+        String query = "Select title FROM costbill where id=?";
+        String name ="";
+        preparedStatement2 = con.prepareStatement(query);
+        preparedStatement2.setObject(1,i);
+        resultSet1 = preparedStatement2.executeQuery();
+        while(resultSet1.next()){
+            name =  resultSet1.getString("title");
+        }
+        return name;
     }
 
 

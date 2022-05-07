@@ -49,7 +49,7 @@
          <children>
             <HBox prefHeight="100.0" prefWidth="200.0" styleClass="reservation-label-section">
                <children>
-                  <Label id="dashboard-label" text="Reservations" />
+                  <Label id="dashboard-label" text="Make a Reservation" />
                </children>
             </HBox>
             <HBox layoutX="10.0" layoutY="10.0" prefHeight="100.0" prefWidth="200.0" styleClass="reservation-input-section">

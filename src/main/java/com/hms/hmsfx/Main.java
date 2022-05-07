@@ -21,10 +21,10 @@ public class Main extends Application {
     @Override
     public void start(Stage stage) throws IOException {
         stg  = stage;
-        FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("Costs.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("Login.fxml"));
         Scene scene = new Scene(fxmlLoader.load(),1480,800);
         scene.getStylesheets().add(getCss());
-        stage.setTitle("Login!");
+        stage.setTitle("Merlin Hotel");
         stage.setScene(scene);
         stage.show();
     }

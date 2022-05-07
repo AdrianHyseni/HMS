@@ -35,7 +35,7 @@
             <Button fx:id="apartmentBtn" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" styleClass="menu-btn" text="Appartments" />
             <Button fx:id="reservationBtn" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" styleClass="menu-btn" text="Book" />
             <Button fx:id="allReservationBtn" layoutX="10.0" layoutY="131.0" mnemonicParsing="false" styleClass="menu-btn" text="Reservations" />
-            <Button fx:id="costBtn" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" styleClass="menu-btn" text="Costs" />
+            <Button fx:id="costsBtn" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" styleClass="menu-btn" text="Costs" />
             <Button fx:id="billBtn" layoutX="10.0" layoutY="35.0" mnemonicParsing="false" styleClass="menu-btn" text="Bills" />
             <Button fx:id="settingsBtn" layoutX="10.0" layoutY="60.0" mnemonicParsing="false" styleClass="menu-btn" text="Settings" />
          </children>
@@ -81,7 +81,7 @@
                               <Label id="cost-price-title" text="Total Cost" />
                               <Label id="cost-price-label" fx:id="costPriceLabel" text="Price" />
                               <Label id="cost-price-label" fx:id="costPriceLabel1" layoutX="10.0" layoutY="27.0" text="Title of the Bill" />
-                              <TextField styleClass="cost-input" fx:id="titleTf" />
+                              <TextField fx:id="titleTf" styleClass="cost-input" />
                               <Button id="cost-btn-1" fx:id="saveBtn" mnemonicParsing="false" text="Save" />
                               <Button id="cost-btn-2" fx:id="printBtn" mnemonicParsing="false" text="Print" />
 

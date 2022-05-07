@@ -73,6 +73,8 @@ public class CostController implements Initializable {
     private Button removeBtn;
     @FXML
     private Button saveBtn;
+    @FXML
+    private Button costsBtn;
 
     //Table
     @FXML
@@ -101,7 +103,7 @@ public class CostController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle)  {
 
         setUserInformation(sd.getUsername());
-        s.sideBar(profileBtn,logoutBtn,settingsBtn,roomBtn,homeBtn,apartmentBtn,reservationBtn,allReservationBtn);
+        s.sideBar(profileBtn,logoutBtn,settingsBtn,roomBtn,homeBtn,apartmentBtn,reservationBtn,allReservationBtn,costsBtn);
         //Type Choice
         ArrayList<String> type =new ArrayList<>();
         type.add("Rent costs and property taxes");
@@ -159,9 +161,11 @@ public class CostController implements Initializable {
     private ObservableList<CostData> costModel = FXCollections.observableArrayList();
     private void addToCostModel(){
         costModel.add( new CostData(typeCb.getSelectionModel().getSelectedItem().toString(),
-                nameTf.getText(),
-                date.getValue().toString(),
-                Double.valueOf(costTf.getText())));
+                        nameTf.getText(),
+                        date.getValue().toString(),
+                        Double.valueOf(costTf.getText())
+                       )
+                );
     }
     private void removeFromTable(){
             int selectedIndex = costDataTableView.getSelectionModel().getSelectedIndex();
@@ -202,7 +206,7 @@ public class CostController implements Initializable {
                         preparedStatement.setObject(1,e.getName());
                         preparedStatement.setObject(2,e.getType());
                         preparedStatement.setObject(3,e.getCostPrice());
-                        preparedStatement.setObject(4,1);
+                        preparedStatement.setObject(4,getId());
                         preparedStatement.setObject(5,e.getDate());
                         preparedStatement.setObject(6,getBillId());
                         preparedStatement.executeUpdate();
@@ -241,5 +245,6 @@ public class CostController implements Initializable {
         }
         return id;
     }
+
 
 }

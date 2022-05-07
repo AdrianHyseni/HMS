@@ -28,6 +28,9 @@ public class MyProfileController implements Initializable {
     private Button reservationBtn;
     @FXML
     private Button allReservationBtn;
+    @FXML
+    private Button costBtn;
+
     SystemData sd = new SystemData();
     SideBar s = new SideBar();
 
@@ -35,7 +38,7 @@ public class MyProfileController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle)  {
         setUserInformation(sd.getUsername());
-        s.sideBar(profileBtn,logoutBtn,settingsBtn,roomBtn,homeBtn,apartmentBtn,reservationBtn,allReservationBtn);
+        s.sideBar(profileBtn,logoutBtn,settingsBtn,roomBtn,homeBtn,apartmentBtn,reservationBtn,allReservationBtn,costBtn);
     }
 
     public void setUserInformation(String username){

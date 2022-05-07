@@ -3,7 +3,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.hms.hmsfx.Controller.ReservationListController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.hms.hmsfx.Controller.CostListController">
    <top>
       <HBox prefHeight="100.0" prefWidth="200.0" styleClass="header" BorderPane.alignment="CENTER">
          <children>
@@ -34,7 +34,7 @@
             <Button fx:id="roomBtn" mnemonicParsing="false" styleClass="menu-btn" text="Rooms" />
             <Button fx:id="apartmentBtn" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" styleClass="menu-btn" text="Appartments" />
             <Button fx:id="reservationBtn" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" styleClass="menu-btn" text="Book" />
-            <Button fx:id="allReservationBtn" layoutX="10.0" layoutY="131.0" mnemonicParsing="false" styleClass="menu-btn" text="Reservations" />
+            <Button fx:id="allReservationBtn" layoutX="10.0" layoutY="130.0" mnemonicParsing="false" styleClass="menu-btn" text="Reservations" />
             <Button fx:id="costBtn" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" styleClass="menu-btn" text="Costs" />
             <Button fx:id="billBtn" layoutX="10.0" layoutY="35.0" mnemonicParsing="false" styleClass="menu-btn" text="Bills" />
             <Button fx:id="settingsBtn" layoutX="10.0" layoutY="60.0" mnemonicParsing="false" styleClass="menu-btn" text="Settings" />
@@ -49,7 +49,7 @@
          <children>
             <HBox prefHeight="100.0" prefWidth="200.0" styleClass="room-list-label-section">
                <children>
-                  <Label id="dashboard-label" text="Reservation List" />
+                  <Label id="dashboard-label" text="Costs" />
                </children>
             </HBox>
             <VBox prefHeight="200.0" prefWidth="100.0" styleClass="room-list-table-section">
@@ -57,26 +57,20 @@
                   <HBox prefHeight="100.0" prefWidth="200.0" styleClass="room-list-controll-section">
                      <children>
                         <Button fx:id="showAllBtn" mnemonicParsing="false" styleClass="room-list-btn1" text="Show All" />
-                        <Button fx:id="freeRoomsBtn" mnemonicParsing="false" styleClass="room-list-btn2" text="Show Active Reservations" />
                         <TextField fx:id="searchField" styleClass="room-list-search" />
+                        <Label id="cost-price-label" text="Total Cost" />
+                        <Label id="cost-price-label" fx:id="costLabel" layoutX="234.0" layoutY="10.0" text="Cost" />
                      </children>
                   </HBox>
                   <VBox prefHeight="200.0" prefWidth="100.0">
                      <children>
-                        <TableView fx:id="reservationTable" prefHeight="200.0" prefWidth="200.0" styleClass="room-list-table">
+                        <TableView fx:id="costTable" prefHeight="200.0" prefWidth="200.0" styleClass="room-list-table">
                           <columns>
-                            <TableColumn fx:id="nameCol" prefWidth="75.0" text="Client Name" />
-                            <TableColumn fx:id="surnameCol" prefWidth="75.0" text="Client Surname" />
-                              <TableColumn fx:id="clientIdCol" prefWidth="75.0" text="Client Personal Id" />
-                              <TableColumn fx:id="phoneCol" prefWidth="75.0" text="Client Phone" />
-                              <TableColumn fx:id="typeCol" prefWidth="75.0" text="Type" />
-                              <TableColumn fx:id="envNameCol" prefWidth="75.0" text="Name" />
-                              <TableColumn fx:id="checkInCol" prefWidth="75.0" text="Check In" />
-                              <TableColumn fx:id="checkOutCol" prefWidth="75.0" text="Check Out" />
-                              <TableColumn fx:id="referenceCol" prefWidth="75.0" text="Reference" />
-                              <TableColumn fx:id="primaryPriceCol" prefWidth="75.0" text="Primary Price" />
-                              <TableColumn fx:id="discountCol" prefWidth="75.0" text="Discount" />
-                              <TableColumn fx:id="totalPriceCol" prefWidth="75.0" text="Total Price" />
+                             <TableColumn fx:id="typeCol" prefWidth="75.0" text="Type" />
+                             <TableColumn fx:id="titleCol" prefWidth="75.0" text="Title" />
+                             <TableColumn fx:id="dateCol" prefWidth="75.0" text="Date" />
+                            <TableColumn fx:id="priceCostCol" prefWidth="75.0" text="Price" />
+                              <TableColumn fx:id="billNameCol" prefWidth="75.0" text="Bill Name" />
                           </columns>
                         </TableView>
                      </children></VBox>

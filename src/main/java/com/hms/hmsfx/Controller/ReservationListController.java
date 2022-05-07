@@ -84,6 +84,9 @@ public class ReservationListController implements Initializable {
     private TableColumn<ReservationData,String> referenceCol;
     @FXML
     private TableColumn<ReservationData,String> discountCol;
+    @FXML
+    private Button costBtn;
+
 
 
     //Search Field
@@ -99,7 +102,7 @@ public class ReservationListController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle)  {
 
         setUserInformation(sd.getUsername());
-        s.sideBar(profileBtn,logoutBtn,settingsBtn,roomBtn,homeBtn,apartmentBtn,reservationBtn,allReservationBtn);
+        s.sideBar(profileBtn,logoutBtn,settingsBtn,roomBtn,homeBtn,apartmentBtn,reservationBtn,allReservationBtn,costBtn);
         //Type Choice
         filterData();
         showAllBtn.setOnAction(new EventHandler<ActionEvent>() {
