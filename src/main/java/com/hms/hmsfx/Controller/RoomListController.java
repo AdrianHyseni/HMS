@@ -52,6 +52,8 @@ public class RoomListController implements Initializable {
     private Button showAllBtn;
     @FXML
     private Button allReservationBtn;
+    @FXML
+    private Button beachBtn;
 
     //Table
     @FXML
@@ -73,7 +75,7 @@ public class RoomListController implements Initializable {
     @FXML
     private TextField searchField;
     @FXML
-    private Button costBtn;
+    private Button costsBtn;
 
 
     SideBar s = new SideBar();
@@ -84,7 +86,7 @@ public class RoomListController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle)  {
 
         setUserInformation(sd.getUsername());
-        s.sideBar(profileBtn,logoutBtn,settingsBtn,roomBtn,homeBtn,apartmentBtn,reservationBtn,allReservationBtn,costBtn);
+        s.sideBar(profileBtn,logoutBtn,settingsBtn,roomBtn,homeBtn,apartmentBtn,reservationBtn,allReservationBtn,costsBtn,beachBtn);
         //Type Choice
         filterData();
         showAllBtn.setOnAction(new EventHandler<ActionEvent>() {

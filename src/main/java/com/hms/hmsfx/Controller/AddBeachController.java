@@ -1,9 +1,10 @@
 package com.hms.hmsfx.Controller;
 
 import com.hms.hmsfx.DatabaseConnection;
+import com.hms.hmsfx.HMSFunctions;
 import com.hms.hmsfx.SideBar;
 import com.hms.hmsfx.data.BeachData;
-import com.hms.hmsfx.data.CostData;
+import com.hms.hmsfx.data.RoomData;
 import com.hms.hmsfx.data.SystemData;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -25,28 +26,28 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.time.YearMonth;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
-import java.util.concurrent.atomic.AtomicReference;
 import java.util.stream.Collectors;
 
-public class CostListController implements Initializable {
+public class AddBeachController implements Initializable {
 
-    ObservableList<CostData> costData =FXCollections.observableArrayList();
+    ObservableList<BeachData> beachData =FXCollections.observableArrayList();
     SystemData sd = new SystemData();
     DatabaseConnection connection = new DatabaseConnection();
     Connection con = connection.getConnection();
     ResultSet resultSet = null;
-    ResultSet resultSet1 = null;
     PreparedStatement preparedStatement = null;
-    PreparedStatement preparedStatement2 = null;
 
     @FXML
     private Label usernameText;
-    @FXML
-    private Label costLabel;
     @FXML
     private Button profileBtn;
     @FXML
@@ -60,38 +61,49 @@ public class CostListController implements Initializable {
     @FXML
     private Button homeBtn;
     @FXML
+    private Button addBtn;
+    @FXML
+    private Button allReservationBtn;
+    //Add Room
+    @FXML
+    private  TextField nameTf;
+    @FXML
+    private TextField priceTf;
+    @FXML
+    private Button deleteBtn;
+    @FXML
     private Button showAllBtn;
     @FXML
     private Button reservationBtn;
-    @FXML
-    private Button allReservationBtn;
 
     //Table
     @FXML
-    private TableView<CostData> costTable;
+    private TableView<BeachData> beachTable;
     @FXML
-    private TableColumn<CostData,?> titleCol;
+    private TableColumn<BeachData,Integer> idCol;
     @FXML
-    private TableColumn<CostData,?> billNameCol;
+    private TableColumn<BeachData,String> nameCol;
     @FXML
-    private TableColumn<CostData,?> priceCostCol;
+    private TableColumn<BeachData,Double> priceCol;
     @FXML
-    private TableColumn<CostData,?> typeCol;
-    @FXML
-    private TableColumn<CostData,?> dateCol;
-    @FXML
-    private Button costsBtn;
-    @FXML
-    private Button beachBtn;
+    private TableColumn<BeachData,String> dateCol;
 
+    @FXML
+    private DatePicker dateBeach;
 
     //Search Field
     @FXML
     private TextField searchField;
     @FXML
-    private DatePicker dateExcel;
+    private Button costsBtn;
+
     @FXML
     private Button saveExcelBtn;
+
+    @FXML
+    private DatePicker dateExcel;
+    @FXML
+    private  Button beachBtn;
 
     SideBar s = new SideBar();
 
@@ -104,25 +116,42 @@ public class CostListController implements Initializable {
         s.sideBar(profileBtn,logoutBtn,settingsBtn,roomBtn,homeBtn,apartmentBtn,reservationBtn,allReservationBtn,costsBtn,beachBtn);
         //Type Choice
         filterData();
-        calculateTotalCost();
-        showAllBtn.setOnAction(new EventHandler<ActionEvent>() {
+        addBtn.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
                 try {
-                    refresh();
+                    addBeach();
                 }catch (Exception e){
+                    e.printStackTrace();
+                    Alert alert = new Alert(Alert.AlertType.ERROR);
+                    alert.setContentText("There was a problem please try again!");
+                    alert.setTitle("Done");
+                    alert.show();
                     e.printStackTrace();
                 }
             }
         });
-
-        saveExcelBtn.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent actionEvent) {
-                export_excel();
+        showAllBtn.setOnAction(event -> {
+            try {
+                beachData.clear();
+                getData();
+            }catch (Exception e){
+                e.printStackTrace();
             }
         });
+        deleteBtn.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                deleteData();
+            }
+        });
+saveExcelBtn.setOnAction(new EventHandler<ActionEvent>() {
+    @Override
+    public void handle(ActionEvent actionEvent) {
 
+        export_excel();
+    }
+});
 
 
 
@@ -133,72 +162,87 @@ public class CostListController implements Initializable {
         usernameText.setText(username);
     }
 
+    public  void addBeach()  {
+try {
+
+    String query = "insert into  beach (name, date, total_price, created_by) values (?,?,?,?)";
+    if (priceTf.getText().matches("\\b\\d+\\b") && !(dateBeach.getValue() == null)) {
+        preparedStatement = con.prepareStatement(query);
+        preparedStatement.setString(1, nameTf.getText());
+        preparedStatement.setString(2, dateBeach.getValue().toString());
+        preparedStatement.setObject(3, priceTf.getText());
+        preparedStatement.setObject(4, 1);
+
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setContentText("The daily report is added");
+        alert.setTitle("Confirmation");
+        alert.show();
+
+        preparedStatement.executeUpdate();
+
+
+    } else {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setContentText("Please check the data field or price!");
+        alert.setTitle("Error");
+        alert.show();
+    }
+}catch (SQLException e){
+    e.printStackTrace();
+}
+
+    }
 
     //divide each data on the right column
     private void setCellTable(){
-        typeCol.setCellValueFactory(new PropertyValueFactory<>("type"));
-        titleCol.setCellValueFactory(new PropertyValueFactory<>("name"));
-        priceCostCol.setCellValueFactory(new PropertyValueFactory<>("costPrice"));
+        nameCol.setCellValueFactory(new PropertyValueFactory<>("name"));
+        priceCol.setCellValueFactory(new PropertyValueFactory<>("totalPrice"));
         dateCol.setCellValueFactory(new PropertyValueFactory<>("date"));
-        billNameCol.setCellValueFactory(new PropertyValueFactory<>("billName"));
-
     }
     //Display Room on the table
-    private void showData(){
-
-        getData();
-        costTable.setItems(costData);
 
 
-    }
     public void filterData() {
         try{
-            String query = "SELECT * FROM costs";
+            String query = "SELECT * FROM beach";
             preparedStatement = con.prepareStatement(query);
             resultSet = preparedStatement.executeQuery();
             while(resultSet.next()){
 
-
-                String title = resultSet.getString("title");
-                String type = resultSet.getString("type");
-                Double costInEu = resultSet.getDouble("costInEu");
+                String name = resultSet.getString("name");
+                double totalPrice = resultSet.getDouble("total_price");
                 String date = resultSet.getString("date");
-                int costBillFk = resultSet.getInt("cost_bill_fk");
-
-                costData.add(new CostData(type,title,date,costInEu,getBillName(costBillFk)));
+                beachData.add(new BeachData(name,date,totalPrice));
             }
-            FilteredList<CostData> filteredApartment = new FilteredList<>(costData, b -> true);
+            FilteredList<BeachData> filteredData = new FilteredList<>(beachData, b -> true);
             //Search Field
             searchField.textProperty().addListener((observable, oldValue, newValue) -> {
-                filteredApartment.setPredicate(apartmentSearchModel -> {
+                filteredData.setPredicate(searchModel -> {
                     String searchKeyword = newValue.toLowerCase();
                     if(newValue.isEmpty() || newValue.isBlank() || newValue == null){
                         return true;
                     }
 
-                    if(apartmentSearchModel.getBillName().toLowerCase().indexOf(searchKeyword) > -1){
+                    if(searchModel.getName().toLowerCase().indexOf(searchKeyword) > -1){
+
                         return true;
                     }
-                    else if(apartmentSearchModel.getDate().toLowerCase().indexOf(searchKeyword) > -1){
-                        return true;
-                    }
-                    else if(apartmentSearchModel.getName().toLowerCase().indexOf(searchKeyword) > -1){
-                        return true;
-                    }
-                    else if(apartmentSearchModel.getType().toLowerCase().indexOf(searchKeyword) > -1){
+                    else if(searchModel.getDate().toLowerCase().indexOf(searchKeyword) > -1){
+
                         return true;
                     }
                     else {
+
                         return false;
                     }
 
                 });
             });
             setCellTable();
-            costTable.setItems(costData);
-            SortedList<CostData> sortedCostLis = new SortedList<>(filteredApartment);
-            sortedCostLis.comparatorProperty().bind(costTable.comparatorProperty());
-            costTable.setItems(sortedCostLis);
+            beachTable.setItems(beachData);
+            SortedList<BeachData> sortedBeach = new SortedList<>(filteredData);
+            sortedBeach.comparatorProperty().bind(beachTable.comparatorProperty());
+            beachTable.setItems(sortedBeach);
 
         }catch(SQLException e){
             e.printStackTrace();
@@ -208,57 +252,50 @@ public class CostListController implements Initializable {
     }
     public void getData() {
         try{
-            String query = "SELECT * FROM apartments";
+            String query = "SELECT * FROM beach";
             preparedStatement = con.prepareStatement(query);
             resultSet = preparedStatement.executeQuery();
             while(resultSet.next()){
 
-                String title = resultSet.getString("title");
-                String type = resultSet.getString("type");
-                Double costInEu = resultSet.getDouble("costInEu");
+                String name = resultSet.getString("name");
+                Double totalPrice = resultSet.getDouble("total_price");
                 String date = resultSet.getString("date");
-                int costBillFk = resultSet.getInt("cost_bill_fk");
-
-                costData.add(new CostData(type,title,date,costInEu,getBillName(costBillFk)));
+                beachData.add(new BeachData(name,date,totalPrice));
             }
             setCellTable();
-            costTable.setItems(costData);
+            beachTable.setItems(beachData);
         }catch(SQLException e){
             e.printStackTrace();
         }
 
     }
+    public void deleteData(){
+        BeachData beach;
+      try{
+            beach = beachTable.getSelectionModel().getSelectedItem();
+            String tempItemName = beach.getName();
+            String query = "DELETE FROM beach WHERE name=?";
+            preparedStatement = con.prepareStatement(query);
+            preparedStatement.setString(1,tempItemName);
+            preparedStatement.execute();
+            refresh();
+
+
+      }catch (SQLException sqlException){
+           sqlException.printStackTrace();
+       }
+    }
     public void refresh(){
-        costData.clear();
+        beachData.clear();
         filterData();
     }
-    public void  calculateTotalCost(){
-        AtomicReference<Double> tc = new AtomicReference<>((double) 0);
-        costData.forEach(e -> {
-            tc.updateAndGet(v -> new Double((double) (v + e.getCostPrice())));
-        });
-        costLabel.setText(String.valueOf(tc));
-    }
-    public String getBillName(int i) throws SQLException {
-        String query = "Select title FROM costbill where id=?";
-        String name ="";
-        preparedStatement2 = con.prepareStatement(query);
-        preparedStatement2.setObject(1,i);
-        resultSet1 = preparedStatement2.executeQuery();
-        while(resultSet1.next()){
-            name =  resultSet1.getString("title");
-        }
-        return name;
-    }
-
-
 
     void export_excel() {
         try {
 
             Stage window = (Stage) saveExcelBtn.getScene().getWindow();
             FileChooser fileChooser = new FileChooser();
-            fileChooser.setInitialFileName("Cost" + LocalDate.now());
+            fileChooser.setInitialFileName("Beach" + LocalDate.now());
             //FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("Comma Delimited (.csv)", ".csv");
             FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("CSV Files", "*.csv");
             fileChooser.getExtensionFilters().add(extFilter);
@@ -266,19 +303,19 @@ public class CostListController implements Initializable {
             FileWriter fileWriter = new FileWriter(file);
             String text = "";
 
-            List<CostData> result;
+            List<BeachData> result;
             if(dateExcel.getValue() == null){
-                result = costData;
+                result = beachData;
             }else{
-                result = sortListByDate(dateExcel.getValue().toString(), costData);
+                result = sortListByDate(dateExcel.getValue().toString(), beachData);
             }
 
-            String header = "Type" + "," + "Name" + "," + "Date"+"," + "Cost in Euro" + ","  + "Bill Name" + "\n";
+            String header = "Name" + "," + "Total Earnings" + "," + "Date"+"\n";
             fileWriter.write(header);
 
 
             for (int i = 0; i < result.size(); i++) {
-                text = result.get(i).getType() + "," + result.get(i).getName() + "," + result.get(i).getDate() + ","+result.get(i).getCostPrice()+","+result.get(i).getBillName()+"\n";
+                text = result.get(i).getName() + "," + result.get(i).getTotalPrice() + "," + result.get(i).getDate() + ","+"\n";
                 fileWriter.write(text);
             }
 
@@ -288,7 +325,7 @@ public class CostListController implements Initializable {
         }
     }
 
-    public List<CostData> sortListByDate(String date1, List<CostData> data) {
+    public List<BeachData> sortListByDate(String date1, List<BeachData> data) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         LocalDate localDate1 = LocalDate.parse(date1, formatter);
 
@@ -304,4 +341,3 @@ public class CostListController implements Initializable {
 
 
 }
-

@@ -824,8 +824,34 @@
     -fx-font-size: 20;
     -fx-font-weight: 600;
 }
+.search-section-beach {
+    -fx-pref-width: 500px;
+    -fx-spacing: 20px;
+    -fx-alignment: center;
+}
 
+.add-beach-center {
+    -fx-background-image: url("assets/beach.jpg");
+    -fx-background-size: cover;
+    -fx-background-repeat: no-repeat;
+    -fx-pref-width: 800px;
+}
 
+.right-side-search {
+    -fx-background-color: rgba(5, 68, 94, 0.8);
+    -fx-pref-width: 600px;
+    -fx-alignment: top-center;
+    -fx-padding: 20px;
+    -fx-background-radius: 40px;
+    -fx-font-size: 16px;
+    -fx-spacing: 10px;
+}
 
+#room-btn-1-search {
+    -fx-pref-width: 140px;
+    -fx-background-color: #189AB4;
+    -fx-background-radius: 10px;
+    -fx-border-radius: 10px;
+}
 
 

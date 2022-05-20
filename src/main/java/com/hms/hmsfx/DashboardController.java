@@ -30,22 +30,22 @@ public class DashboardController implements Initializable {
     private Button roomBtn;
 
     @FXML
-    private Button billBtn;
+    private Button billsBtn;
 
     @FXML
-    private Button costBtn;
+    private Button costsBtn;
 
     @FXML
     private Button settingsBtn;
 
-    @FXML
-    private Button settingsBtnSide;
+
 
     @FXML
     private Button reservationBtn;
 
+
     @FXML
-    private Button roomBtnSide;
+    private Button beachBtn;
 
     @FXML
     private Button homeBtn;
@@ -72,7 +72,7 @@ public class DashboardController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle)  {
-        s.sideBar(profileBtn,logoutBtn,settingsBtnSide,roomBtnSide,homeBtn,apartmentBtn,reservationBtn, allReservationBtn,costBtn);
+        s.sideBar(profileBtn,logoutBtn,settingsBtn,roomBtn,homeBtn,apartmentBtn,reservationBtn, allReservationBtn,costsBtn,beachBtn);
         roomBtn.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
@@ -96,7 +96,7 @@ public class DashboardController implements Initializable {
             }
         });
 
-        costBtn.setOnAction(new EventHandler<ActionEvent>() {
+        costsBtn.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
                 try {

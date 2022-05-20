@@ -84,6 +84,11 @@ public class HMSFunctions {
         m.changeScene("CostList.fxml");
     }
 
+    public void gotoBeach() throws IOException{
+        Main m = new Main();
+        m.changeScene("AddBeach.fxml");
+    }
+
     public void update() throws SQLException {
         DatabaseConnection connection = new DatabaseConnection();
         Connection con = connection.getConnection();

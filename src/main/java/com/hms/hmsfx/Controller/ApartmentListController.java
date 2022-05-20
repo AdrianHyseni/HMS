@@ -53,6 +53,8 @@ public class ApartmentListController implements Initializable {
     private Button reservationBtn;
     @FXML
     private Button allReservationBtn;
+    @FXML
+    private Button beachBtn;
 
     //Table
     @FXML
@@ -85,7 +87,7 @@ public class ApartmentListController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle)  {
 
         setUserInformation(sd.getUsername());
-        s.sideBar(profileBtn,logoutBtn,settingsBtn,roomBtn,homeBtn,apartmentBtn,reservationBtn,allReservationBtn,costsBtn);
+        s.sideBar(profileBtn,logoutBtn,settingsBtn,roomBtn,homeBtn,apartmentBtn,reservationBtn,allReservationBtn,costsBtn,beachBtn);
         //Type Choice
         filterData();
         showAllBtn.setOnAction(new EventHandler<ActionEvent>() {

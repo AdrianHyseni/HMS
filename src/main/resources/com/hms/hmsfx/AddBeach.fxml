@@ -3,7 +3,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.hms.hmsfx.Controller.AddApartmentController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.hms.hmsfx.Controller.AddBeachController">
    <top>
       <HBox prefHeight="100.0" prefWidth="200.0" styleClass="header" BorderPane.alignment="CENTER">
          <children>
@@ -39,6 +39,7 @@
             <Button fx:id="beachBtn" layoutX="10.0" layoutY="35.0" mnemonicParsing="false" styleClass="menu-btn" text="Beach" />
             <Button fx:id="billsBtn" layoutX="10.0" layoutY="60.0" mnemonicParsing="false" styleClass="menu-btn" text="Bills" />
             <Button fx:id="settingsBtn" layoutX="10.0" layoutY="60.0" mnemonicParsing="false" styleClass="menu-btn" text="Settings" />
+
          </children>
       </VBox>
    </left>
@@ -46,11 +47,11 @@
       <Pane prefHeight="80.0" prefWidth="200.0" styleClass="footer" BorderPane.alignment="CENTER" />
    </bottom>
    <center>
-      <VBox prefHeight="200.0" prefWidth="100.0" styleClass="add-apartment-center" BorderPane.alignment="CENTER">
+      <VBox prefHeight="200.0" prefWidth="100.0" styleClass="add-beach-center" BorderPane.alignment="CENTER">
          <children>
             <HBox prefHeight="100.0" prefWidth="200.0" styleClass="room-title-section">
                <children>
-                  <Label id="room-label" text="Apartments" />
+                  <Label id="room-label" text="Beach " />
                </children>
             </HBox>
             <HBox prefHeight="100.0" prefWidth="200.0" styleClass="add-room-section">
@@ -59,25 +60,18 @@
                      <children>
                         <Label id="room-label-1" text="Name" />
                         <TextField id="room-input" fx:id="nameTf" />
-                        <Label id="room-label-1" layoutX="10.0" layoutY="10.0" text="Price" />
+                        <Label id="room-label-1" layoutX="10.0" layoutY="10.0" text="Total Price " />
                         <TextField id="room-input" fx:id="priceTf" layoutX="10.0" layoutY="27.0" />
-                        <Label id="room-label-1" layoutX="10.0" layoutY="52.0" text="Type" />
-                        <ChoiceBox fx:id="typeCb" prefWidth="150.0" />
-                        <Label id="room-label-1" layoutX="10.0" layoutY="94.0" text="Status" />
-                        <CheckBox fx:id="status" mnemonicParsing="false" text="Is Free" />
-                        <Label id="room-label-1" text="Specs" />
-                        <TextArea fx:id="specsTa" prefHeight="200.0" prefWidth="200.0" styleClass="text-area-room" />
-                        <Label id="room-label-1" layoutX="10.0" layoutY="175.0" text="Description" />
-                        <TextArea fx:id="descriptionTa" layoutX="10.0" layoutY="192.0" prefHeight="200.0" prefWidth="200.0" styleClass="text-area-room" />
+                        <Label id="room-label-1" layoutX="10.0" layoutY="52.0" text="Date" />
+                        <DatePicker fx:id="dateBeach" />
                         <HBox id="room-add-section" prefHeight="100.0" prefWidth="200.0">
                            <children>
                               <Button id="room-btn-1" fx:id="addBtn" mnemonicParsing="false" text="Add" />
-                              <Button id="room-btn-2" mnemonicParsing="false" text="Edit" />
                            </children>
                         </HBox>
                      </children>
                   </VBox>
-                  <VBox id="right-side" layoutX="10.0" layoutY="10.0" prefHeight="200.0" prefWidth="100.0">
+                  <VBox layoutX="10.0" layoutY="10.0" prefHeight="200.0" prefWidth="100.0" styleClass="right-side-search">
                      <children>
                         <HBox prefHeight="100.0" prefWidth="200.0" styleClass="search-section">
                            <children>
@@ -86,17 +80,20 @@
                               <Button id="room-btn-2" fx:id="deleteBtn" mnemonicParsing="false" text="Delete" />
                            </children>
                         </HBox>
-                        <TableView id="room-table" fx:id="apartmentTable" prefHeight="200.0" prefWidth="200.0">
+                        <TableView fx:id="beachTable" prefHeight="200.0" prefWidth="200.0" styleClass="room-table-beach">
                           <columns>
-                            <TableColumn fx:id="idCol" prefWidth="75.0" text="Id" />
                             <TableColumn fx:id="nameCol" prefWidth="75.0" text="Name" />
-                              <TableColumn fx:id="descCol" prefWidth="75.0" text="Description" />
-                              <TableColumn fx:id="priceCol" prefWidth="75.0" text="Price" />
-                              <TableColumn fx:id="typeCol" prefWidth="75.0" text="Type" />
-                              <TableColumn fx:id="statusCol" prefWidth="75.0" text="Is Free" />
-                              <TableColumn fx:id="specsCol" prefWidth="75.0" text="Specs" />
+                              <TableColumn fx:id="priceCol" prefWidth="75.0" text="Total Earnings" />
+                              <TableColumn fx:id="dateCol" prefWidth="75.0" text="Date" />
                           </columns>
                         </TableView>
+                        <HBox layoutX="10.0" layoutY="10.0" prefHeight="100.0" prefWidth="200.0" styleClass="search-section-beach">
+                           <children>
+                              <Label id="room-label-1" layoutX="10.0" layoutY="52.0" text="Enter the date: " />
+                              <DatePicker fx:id="dateExcel" />
+                              <Button id="room-btn-1-search" fx:id="saveExcelBtn" mnemonicParsing="false" text="Save Excel" />
+                           </children>
+                        </HBox>
                      </children>
                   </VBox>
                </children>

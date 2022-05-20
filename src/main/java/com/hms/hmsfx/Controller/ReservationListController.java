@@ -2,6 +2,7 @@ package com.hms.hmsfx.Controller;
 
 import com.hms.hmsfx.DatabaseConnection;
 import com.hms.hmsfx.SideBar;
+import com.hms.hmsfx.data.BeachData;
 import com.hms.hmsfx.data.ReservationData;
 import com.hms.hmsfx.data.SystemData;
 import javafx.collections.FXCollections;
@@ -14,13 +15,23 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.FileChooser;
+import javafx.stage.Stage;
+import org.w3c.dom.Document;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.FileWriter;
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.List;
 import java.util.ResourceBundle;
+import java.util.stream.Collectors;
 
 public class ReservationListController implements Initializable {
 
@@ -56,6 +67,8 @@ public class ReservationListController implements Initializable {
     private Button reservationBtn;
     @FXML
     private Button allReservationBtn;
+    @FXML
+    private Button beachBtn;
 
     //Table
     @FXML
@@ -85,14 +98,19 @@ public class ReservationListController implements Initializable {
     @FXML
     private TableColumn<ReservationData,String> discountCol;
     @FXML
-    private Button costBtn;
+    private Button costsBtn;
+    @FXML
+    private Button saveExcelBtn;
 
+    @FXML
+    private DatePicker dateExcel;
 
 
     //Search Field
     @FXML
     private TextField searchField;
-
+    @FXML
+    private Button printBtn;
 
     SideBar s = new SideBar();
 
@@ -102,7 +120,7 @@ public class ReservationListController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle)  {
 
         setUserInformation(sd.getUsername());
-        s.sideBar(profileBtn,logoutBtn,settingsBtn,roomBtn,homeBtn,apartmentBtn,reservationBtn,allReservationBtn,costBtn);
+        s.sideBar(profileBtn,logoutBtn,settingsBtn,roomBtn,homeBtn,apartmentBtn,reservationBtn,allReservationBtn,costsBtn,beachBtn);
         //Type Choice
         filterData();
         showAllBtn.setOnAction(new EventHandler<ActionEvent>() {
@@ -120,6 +138,12 @@ public class ReservationListController implements Initializable {
             @Override
             public void handle(ActionEvent event) {
                 getActiveReservation();
+            }
+        });
+        saveExcelBtn.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+                export_excel();
             }
         });
 
@@ -319,6 +343,54 @@ public class ReservationListController implements Initializable {
         }
         return name;
     }
+
+
+    void export_excel() {
+        try {
+
+            Stage window = (Stage) saveExcelBtn.getScene().getWindow();
+            FileChooser fileChooser = new FileChooser();
+            fileChooser.setInitialFileName("Reservation" + LocalDate.now());
+            FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("CSV Files", "*.csv");
+            fileChooser.getExtensionFilters().add(extFilter);
+            File file = fileChooser.showSaveDialog(window);
+            FileWriter fileWriter = new FileWriter(file);
+            String text = "";
+
+            List<ReservationData> result;
+            if(dateExcel.getValue() == null){
+                result = reservationData;
+            }else{
+                result = sortListByDate(dateExcel.getValue().toString(), reservationData);
+            }
+
+            String header = "Client Name" + "," + "Client Surname" + "," + "Client Id"+","+ "Client Phone"+","+"Type"+"," +"Environment Name"+","+ "Reference"+","+ "Check In"+","+ "Check Out"+","+ "Primary Price"+","+ "Discount"+","+ "Total Price"+","+"\n";
+            fileWriter.write(header);
+
+
+            for (int i = 0; i < result.size(); i++) {
+                text = result.get(i).getClientName() + "," + result.get(i).getClientSurname() + "," + result.get(i).getClientId() + ","+ result.get(i).getPhone()+","+
+                        result.get(i).getType()+","+ result.get(i).getEnvStaying() +","+ result.get(i).getReference()+","+result.get(i).getCheckIn()+ ","+
+                        result.get(i).getCheckOut()+","+result.get(i).getPrimaryPrice()  +","+ result.get(i).getDiscount() +"," + result.get(i).getTotalPrice()+
+                        "\n";
+                fileWriter.write(text);
+            }
+
+            fileWriter.close();
+        } catch (Exception ex) {
+        }
+    }
+    public List<ReservationData> sortListByDate(String date1, List<ReservationData> data) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        LocalDate localDate1 = LocalDate.parse(date1, formatter);
+
+        return data
+                .stream()
+                .filter(e -> LocalDate.parse(e.getCheckIn(), formatter).isAfter(localDate1))
+                .collect(Collectors.toList());
+    }
+
+    //PDF writer
 
 
 

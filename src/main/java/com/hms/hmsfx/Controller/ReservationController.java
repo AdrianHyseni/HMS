@@ -88,7 +88,9 @@ public class ReservationController implements Initializable {
     @FXML
     private Button homeBtn;
     @FXML
-    private Button costBtn;
+    private Button costsBtn;
+    @FXML
+    private Button beachBtn;
 
 
  @Override
@@ -96,7 +98,7 @@ public class ReservationController implements Initializable {
 
   setUserInformation(sd.getUsername());
   usernameText.setText("test");
-  s.sideBar(profileBtn,logoutBtn,settingsBtn,roomBtn,homeBtn,apartmentBtn,reservationBtn,allReservationBtn,costBtn);
+  s.sideBar(profileBtn,logoutBtn,settingsBtn,roomBtn,homeBtn,apartmentBtn,reservationBtn,allReservationBtn,costsBtn,beachBtn);
   ArrayList<String> type =new ArrayList<>();
   type.add("Apartments");
   type.add("Rooms");
@@ -138,16 +140,24 @@ public class ReservationController implements Initializable {
   });
 
   discountTf.textProperty().addListener(((observableValue, s1, t1) -> {
-     if(t1.matches("[0-9]{1,13}(\\\\.[0-9]*)?")) {
-      int days = checkOutDc.getValue().getDayOfYear() - checkInDc.getValue().getDayOfYear();
-      double price = Double.parseDouble(calculateTotalPrice(primaryPriceTf.getText(), t1, days));
-      totalPriceLabel.setText(String.valueOf(price));
-     }else {
-      Alert alert = new Alert(Alert.AlertType.ERROR);
-      alert.setTitle("Error discount");
-      alert.setContentText("Please the ");
-      alert.show();
-     }
+   if(checkInDc.getValue()==null || checkOutDc.getValue() == null){
+    Alert alert = new Alert(Alert.AlertType.ERROR);
+    alert.setTitle("Error discount");
+    alert.setContentText("Please the check in and check out fields can't be empty  ");
+    alert.show();
+   }else {
+    if (t1.matches("[0-9]{1,13}(\\\\.[0-9]*)?")) {
+     int days = checkOutDc.getValue().getDayOfYear() - checkInDc.getValue().getDayOfYear();
+     double price = Double.parseDouble(calculateTotalPrice(primaryPriceTf.getText(), t1, days));
+     totalPriceLabel.setText(String.valueOf(price));
+
+    } else {
+     Alert alert = new Alert(Alert.AlertType.ERROR);
+     alert.setTitle("Error discount");
+     alert.setContentText("Please enter a number ");
+     alert.show();
+    }
+   }//end of the if for check in and check out
 
 
   }));
@@ -249,10 +259,6 @@ public class ReservationController implements Initializable {
       alert.show();
      }
 
-     Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-     alert.setContentText("You have reserved the "+typeCb.getSelectionModel().getSelectedItem()+" "+envCb.getSelectionModel().getSelectedItem());
-     alert.setTitle("Done");
-     alert.show();
 
    }
     catch (SQLException sqlException){
@@ -260,6 +266,10 @@ public class ReservationController implements Initializable {
     }
 
    }
+  Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+  alert.setContentText("You have reserved the "+typeCb.getSelectionModel().getSelectedItem()+" "+envCb.getSelectionModel().getSelectedItem());
+  alert.setTitle("Done");
+  alert.show();
 
  }
  private void test(ReservationData r, PreparedStatement p) throws SQLException {
@@ -401,6 +411,7 @@ public class ReservationController implements Initializable {
   preparedStatement3.executeUpdate();
 
  }
+
 
 
 }

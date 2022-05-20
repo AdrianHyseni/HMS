@@ -56,6 +56,8 @@ public class CostController implements Initializable {
     private Button reservationBtn;
     @FXML
     private Button allReservationBtn;
+    @FXML
+    private Button beachBtn;
     //Add Cost
     @FXML
     private TextField nameTf;
@@ -103,7 +105,7 @@ public class CostController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle)  {
 
         setUserInformation(sd.getUsername());
-        s.sideBar(profileBtn,logoutBtn,settingsBtn,roomBtn,homeBtn,apartmentBtn,reservationBtn,allReservationBtn,costsBtn);
+        s.sideBar(profileBtn,logoutBtn,settingsBtn,roomBtn,homeBtn,apartmentBtn,reservationBtn,allReservationBtn,costsBtn,beachBtn);
         //Type Choice
         ArrayList<String> type =new ArrayList<>();
         type.add("Rent costs and property taxes");

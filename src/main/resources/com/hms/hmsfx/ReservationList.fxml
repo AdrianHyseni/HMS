@@ -35,8 +35,9 @@
             <Button fx:id="apartmentBtn" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" styleClass="menu-btn" text="Appartments" />
             <Button fx:id="reservationBtn" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" styleClass="menu-btn" text="Book" />
             <Button fx:id="allReservationBtn" layoutX="10.0" layoutY="131.0" mnemonicParsing="false" styleClass="menu-btn" text="Reservations" />
-            <Button fx:id="costBtn" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" styleClass="menu-btn" text="Costs" />
-            <Button fx:id="billBtn" layoutX="10.0" layoutY="35.0" mnemonicParsing="false" styleClass="menu-btn" text="Bills" />
+            <Button fx:id="costsBtn" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" styleClass="menu-btn" text="Costs" />
+            <Button fx:id="beachBtn" layoutX="10.0" layoutY="35.0" mnemonicParsing="false" styleClass="menu-btn" text="Beach" />
+            <Button fx:id="billsBtn" layoutX="10.0" layoutY="60.0" mnemonicParsing="false" styleClass="menu-btn" text="Bills" />
             <Button fx:id="settingsBtn" layoutX="10.0" layoutY="60.0" mnemonicParsing="false" styleClass="menu-btn" text="Settings" />
          </children>
       </VBox>
@@ -59,6 +60,7 @@
                         <Button fx:id="showAllBtn" mnemonicParsing="false" styleClass="room-list-btn1" text="Show All" />
                         <Button fx:id="freeRoomsBtn" mnemonicParsing="false" styleClass="room-list-btn2" text="Show Active Reservations" />
                         <TextField fx:id="searchField" styleClass="room-list-search" />
+                        <Button fx:id="printBtn" mnemonicParsing="false" styleClass="room-list-btn2" text="Print" />
                      </children>
                   </HBox>
                   <VBox prefHeight="200.0" prefWidth="100.0">
@@ -79,6 +81,13 @@
                               <TableColumn fx:id="totalPriceCol" prefWidth="75.0" text="Total Price" />
                           </columns>
                         </TableView>
+                        <HBox layoutX="10.0" layoutY="10.0" prefHeight="100.0" prefWidth="200.0" styleClass="search-section-beach">
+                           <children>
+                              <Label id="room-label-1" layoutX="10.0" layoutY="52.0" text="Enter the date: " />
+                              <DatePicker fx:id="dateExcel" />
+                              <Button id="room-btn-1-search" fx:id="saveExcelBtn" mnemonicParsing="false" text="Save Excel" />
+                           </children>
+                        </HBox>
                      </children></VBox>
                </children>
             </VBox>
