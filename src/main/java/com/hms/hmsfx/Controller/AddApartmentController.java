@@ -89,11 +89,15 @@ public class AddApartmentController implements Initializable {
     private TableColumn<RoomData,Boolean> statusCol;
     @FXML
     private  Button reservationBtn;
+    @FXML
+    private Button costsBtn;
 
     //Search Field
     @FXML
     private TextField searchField;
 
+    @FXML
+    private Button beachBtn;
 
     SideBar s = new SideBar();
 
@@ -103,7 +107,7 @@ public class AddApartmentController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle)  {
 
         setUserInformation(sd.getUsername());
-        s.sideBar(profileBtn,logoutBtn,settingsBtn,roomBtn,homeBtn,apartmentBtn,reservationBtn,allReservationBtn);
+        s.sideBar(profileBtn,logoutBtn,settingsBtn,roomBtn,homeBtn,apartmentBtn,reservationBtn,allReservationBtn,costsBtn,beachBtn);
         //Type Choice
         ArrayList<String> type =new ArrayList<>();
         type.add("single");

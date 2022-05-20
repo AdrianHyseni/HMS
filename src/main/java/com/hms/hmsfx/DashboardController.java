@@ -30,27 +30,37 @@ public class DashboardController implements Initializable {
     private Button roomBtn;
 
     @FXML
-    private Button billBtn;
+    private Button billsBtn;
 
     @FXML
-    private Button costBtn;
+    private Button costsBtn;
 
     @FXML
     private Button settingsBtn;
 
-    @FXML
-    private Button settingsBtnSide;
+
 
     @FXML
     private Button reservationBtn;
 
+
     @FXML
-    private Button roomBtnSide;
+    private Button beachBtn;
 
     @FXML
     private Button homeBtn;
     @FXML
     private Button allReservationBtn;
+
+    @FXML
+    private Button addReservationBtn;
+
+    @FXML
+    private Button goToCostsBtn;
+    @FXML
+    private Button apartmentListBtn;
+
+
 
     HMSFunctions hmsFunctions = new HMSFunctions();
     SideBar s = new SideBar();
@@ -62,7 +72,7 @@ public class DashboardController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle)  {
-        s.sideBar(profileBtn,logoutBtn,settingsBtnSide,roomBtnSide,homeBtn,apartmentBtn,reservationBtn, allReservationBtn);
+        s.sideBar(profileBtn,logoutBtn,settingsBtn,roomBtn,homeBtn,apartmentBtn,reservationBtn, allReservationBtn,costsBtn,beachBtn);
         roomBtn.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
@@ -86,6 +96,18 @@ public class DashboardController implements Initializable {
             }
         });
 
+        costsBtn.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                try {
+                    hmsFunctions.gotoCosts();
+                }
+                catch (Exception e){
+                    e.printStackTrace();
+                }
+            }
+        });
+
 
         setUserInformation(sd.getUsername(),null);
         settingsBtn.setOnAction(new EventHandler<ActionEvent>() {
@@ -95,6 +117,41 @@ public class DashboardController implements Initializable {
                     hmsFunctions.goToSettings();
                 }
                 catch (Exception e){
+                    e.printStackTrace();
+                }
+            }
+        });
+
+        addReservationBtn.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+                try{
+                    hmsFunctions.gotoReservationList();
+                }catch (Exception e){
+                    e.printStackTrace();
+
+                }
+            }
+        });
+
+        goToCostsBtn.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+                try{
+                    hmsFunctions.gotoCostList();
+                }catch (Exception e){
+                    e.printStackTrace();
+
+                }
+            }
+        });
+
+        apartmentListBtn.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+                try{
+                    hmsFunctions.goToApartments();
+                }catch (Exception e ){
                     e.printStackTrace();
                 }
             }

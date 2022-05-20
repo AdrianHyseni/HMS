@@ -707,3 +707,151 @@
     -fx-font-size: 18px;
 
 }
+
+#title-cost{
+    -fx-text-fill: #fff;
+    -fx-font-size: 18;
+    -fx-font-weight: 600;
+}
+#cost-label{
+    -fx-text-fill: #A9C5D0;
+    -fx-font-size: 14;
+    -fx-font-weight: 600;
+}
+.cost-input{
+    -fx-alignment: center;
+    -fx-pref-width: 220px;
+    -fx-pref-height: 25px;
+
+    -fx-background-color: rgba(177, 212, 224, 0.7);
+    -fx-border-radius: 40px;
+
+    -fx-font-style: normal;
+    -fx-font-size: 14px;
+
+    -fx-text-fill: #0C2D48;
+
+}
+.cost-main-grid{
+    -fx-background-image: url("assets/holiday.jpg");
+    -fx-background-size: cover;
+    -fx-background-repeat: no-repeat;
+    -fx-alignment: center;
+    -fx-padding: 40px;
+    -fx-spacing: 30px;
+}
+.cost-input-v{
+    -fx-background-color: rgba(5, 68, 94, 0.9);
+    -fx-background-radius: 20px;
+    -fx-pref-height: 600px;
+    -fx-pref-width: 300px;
+    -fx-alignment: center;
+    -fx-text-alignment: center;
+    -fx-padding: 10px;
+    -fx-spacing: 10px;
+}
+.cost-right-v{
+    -fx-pref-height: 600px;
+    -fx-pref-width: 800px;
+    -fx-alignment: center;
+    -fx-text-alignment: center;
+    -fx-padding: 10px;
+    -fx-spacing: 10px;
+}
+.cost-table{
+    -fx-background-color: rgba(5, 68, 94, 0.9);
+    -fx-background-radius: 20px;
+    -fx-pref-height: 280px;
+    -fx-pref-width: 600px;
+    -fx-alignment: center;
+    -fx-text-alignment: center;
+    -fx-padding: 10px;
+    -fx-spacing: 10px;
+}
+.cost-conf-v{
+    -fx-background-color: rgba(5, 68, 94, 0.9);
+    -fx-background-radius: 20px;
+    -fx-pref-height: 300px;
+    -fx-pref-width: 600px;
+    -fx-alignment: center;
+    -fx-text-alignment: center;
+    -fx-padding: 15px;
+    -fx-spacing: 15px;
+}
+#cost-btn-1{
+    -fx-pref-width: 200px;
+    -fx-background-color: #050A30;
+    -fx-background-radius: 20px;
+    -fx-text-fill: #fff;
+    -fx-font-size: 14px;
+}
+#cost-btn-1:hover{
+    -fx-background-color: #E8DAC0;
+    -fx-text-fill: #000;
+
+}
+#cost-btn-2:hover{
+    -fx-background-color: #E8DAC0;
+    -fx-text-fill: #000;
+}
+#cost-remove-btn{
+    -fx-pref-width: 200px;
+    -fx-background-color: #BA0F30;
+    -fx-background-radius: 20px;
+    -fx-text-fill: #fff;
+    -fx-font-size: 16px;
+}
+#cost-remove-btn:hover{
+    -fx-background-color: #E8DAC0;
+    -fx-text-fill: #000;
+
+}
+#cost-btn-2{
+    -fx-pref-width: 200px;
+    -fx-background-color: #FFB7B0;
+    -fx-background-radius: 20px;
+    -fx-text-fill: #fff;
+    -fx-font-size: 14px;
+}
+
+#cost-price-label{
+    -fx-text-fill: #A9C5D0;
+    -fx-font-size: 16;
+    -fx-font-weight: 600;
+}
+#cost-price-title{
+    -fx-text-fill: #A9C5D0;
+    -fx-font-size: 20;
+    -fx-font-weight: 600;
+}
+.search-section-beach {
+    -fx-pref-width: 500px;
+    -fx-spacing: 20px;
+    -fx-alignment: center;
+}
+
+.add-beach-center {
+    -fx-background-image: url("assets/beach.jpg");
+    -fx-background-size: cover;
+    -fx-background-repeat: no-repeat;
+    -fx-pref-width: 800px;
+}
+
+.right-side-search {
+    -fx-background-color: rgba(5, 68, 94, 0.8);
+    -fx-pref-width: 600px;
+    -fx-alignment: top-center;
+    -fx-padding: 20px;
+    -fx-background-radius: 40px;
+    -fx-font-size: 16px;
+    -fx-spacing: 10px;
+}
+
+#room-btn-1-search {
+    -fx-pref-width: 140px;
+    -fx-background-color: #189AB4;
+    -fx-background-radius: 10px;
+    -fx-border-radius: 10px;
+}
+
+

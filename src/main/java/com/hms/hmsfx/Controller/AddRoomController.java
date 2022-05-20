@@ -69,6 +69,8 @@ public class AddRoomController implements Initializable {
     private Button showAllBtn;
     @FXML
     private Button reservationBtn;
+    @FXML
+    private Button beachBtn;
 
     //Table
     @FXML
@@ -89,7 +91,8 @@ public class AddRoomController implements Initializable {
     //Search Field
     @FXML
     private TextField searchField;
-
+    @FXML
+    private Button costsBtn;
 
     SideBar s = new SideBar();
     HMSFunctions hmsFunctions = new HMSFunctions();
@@ -100,7 +103,7 @@ public class AddRoomController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle)  {
 
         setUserInformation(sd.getUsername());
-        s.sideBar(profileBtn,logoutBtn,settingsBtn,roomBtn,homeBtn,apartmentBtn,reservationBtn,allReservationBtn);
+        s.sideBar(profileBtn,logoutBtn,settingsBtn,roomBtn,homeBtn,apartmentBtn,reservationBtn,allReservationBtn,costsBtn,beachBtn);
         //Type Choice
         ArrayList<String> type =new ArrayList<>();
         type.add("single");

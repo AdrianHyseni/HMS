@@ -3,7 +3,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.hms.hmsfx.Controller.ApartmentListController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.hms.hmsfx.Controller.CostController">
    <top>
       <HBox prefHeight="100.0" prefWidth="200.0" styleClass="header" BorderPane.alignment="CENTER">
          <children>
@@ -46,38 +46,50 @@
       <Pane prefHeight="80.0" prefWidth="200.0" styleClass="footer" BorderPane.alignment="CENTER" />
    </bottom>
    <center>
-      <VBox prefHeight="200.0" prefWidth="100.0" styleClass="apartment-list-center" BorderPane.alignment="CENTER">
+      <HBox prefHeight="100.0" prefWidth="200.0" styleClass="cost-main-grid" BorderPane.alignment="CENTER">
          <children>
-            <HBox prefHeight="100.0" prefWidth="200.0" styleClass="room-list-label-section">
+            <VBox prefHeight="200.0" prefWidth="100.0" styleClass="cost-input-v">
                <children>
-                  <Label id="dashboard-label" text="Apartments" />
-               </children>
-            </HBox>
-            <VBox prefHeight="200.0" prefWidth="100.0" styleClass="room-list-table-section">
+                  <Label id="title-cost" text="Add Cost" />
+                  <Label id="cost-label" layoutX="10.0" layoutY="10.0" text="Type" />
+                  <ChoiceBox fx:id="typeCb" prefWidth="150.0" styleClass="cost-input" />
+                  <Label id="cost-label" layoutX="10.0" layoutY="27.0" text="Name" />
+                  <TextField fx:id="nameTf" styleClass="cost-input" text="name" />
+                  <Label id="cost-label" layoutX="10.0" layoutY="44.0" text="Date" />
+                  <DatePicker fx:id="date" styleClass="cost-input" />
+                  <Label id="cost-label" layoutX="10.0" layoutY="61.0" text="Cost" />
+                  <TextField fx:id="costTf" layoutX="10.0" layoutY="95.0" styleClass="cost-input" text="cost" />
+                  <Button id="cost-btn-1" fx:id="addCostBtn" mnemonicParsing="false" text="Add" />
+               </children></VBox>
+            <VBox prefHeight="200.0" prefWidth="100.0" styleClass="cost-right-v">
                <children>
-                  <HBox prefHeight="100.0" prefWidth="200.0" styleClass="room-list-controll-section">
+                  <VBox prefHeight="200.0" prefWidth="100.0" styleClass="cost-table">
                      <children>
-                        <Button fx:id="showAllBtn" mnemonicParsing="false" styleClass="room-list-btn1" text="Show All" />
-                        <Button fx:id="freeRoomsBtn" mnemonicParsing="false" styleClass="room-list-btn2" text="Free Apartments" />
-                        <TextField fx:id="searchField" styleClass="room-list-search" />
-                     </children>
-                  </HBox>
-                  <VBox prefHeight="200.0" prefWidth="100.0">
-                     <children>
-                        <TableView fx:id="roomTable" prefHeight="200.0" prefWidth="200.0" styleClass="room-list-table">
+                        <TableView fx:id="costDataTableView" prefHeight="200.0" prefWidth="200.0">
                           <columns>
+                            <TableColumn fx:id="typeCol" prefWidth="75.0" text="Type" />
                             <TableColumn fx:id="nameCol" prefWidth="75.0" text="Name" />
-                            <TableColumn fx:id="priceCol" prefWidth="75.0" text="Price" />
-                              <TableColumn fx:id="typeCol" prefWidth="75.0" text="Type" />
-                              <TableColumn fx:id="statusCol" prefWidth="75.0" text="Is Free" />
-                              <TableColumn fx:id="descriptionCol" prefWidth="75.0" text="Description" />
-                              <TableColumn fx:id="specsCol" prefWidth="75.0" text="Specs" />
+                              <TableColumn fx:id="dateCol" prefWidth="75.0" text="Date" />
+                              <TableColumn fx:id="priceCostCol" prefWidth="75.0" text="Cost" />
                           </columns>
                         </TableView>
+                        <Button id="cost-remove-btn" fx:id="removeBtn" mnemonicParsing="false" text="Remove" />
                      </children></VBox>
-               </children>
-            </VBox>
-         </children>
-      </VBox>
+                  <HBox layoutX="10.0" layoutY="170.0" prefHeight="100.0" prefWidth="200.0">
+                     <children>
+                        <VBox prefHeight="200.0" prefWidth="100.0" styleClass="cost-conf-v">
+                           <children>
+                              <Label id="cost-price-title" text="Total Cost" />
+                              <Label id="cost-price-label" fx:id="costPriceLabel" text="Price" />
+                              <Label id="cost-price-label" fx:id="costPriceLabel1" layoutX="10.0" layoutY="27.0" text="Title of the Bill" />
+                              <TextField fx:id="titleTf" styleClass="cost-input" />
+                              <Button id="cost-btn-1" fx:id="saveBtn" mnemonicParsing="false" text="Save" />
+                              <Button id="cost-btn-2" fx:id="printBtn" mnemonicParsing="false" text="Print" />
+
+                           </children>
+                        </VBox>
+                     </children></HBox>
+               </children></VBox>
+         </children></HBox>
    </center>
 </BorderPane>

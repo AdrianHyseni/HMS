@@ -42,6 +42,10 @@ public class SettingsController implements Initializable {
     private Button reservationBtn;
     @FXML
     private Button allReservationBtn;
+    @FXML
+    private Button costsBtn;
+    @FXML
+    private  Button beachBtn;
 
     SideBar s = new SideBar();
     HMSFunctions hmsFunctions = new HMSFunctions();
@@ -51,7 +55,7 @@ public class SettingsController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle)  {
         setUserInformation(sd.getUsername());
-        s.sideBar(profileBtn,logoutBtn,settingsBtn,roomBtn,homeBtn,apartmentBtn,reservationBtn,allReservationBtn);
+        s.sideBar(profileBtn,logoutBtn,settingsBtn,roomBtn,homeBtn,apartmentBtn,reservationBtn,allReservationBtn,costsBtn,beachBtn);
         editProfileBtn.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
@@ -77,6 +81,17 @@ public class SettingsController implements Initializable {
             public void handle(ActionEvent event) {
                 try{
                     hmsFunctions.newRoom();
+                }catch (Exception e){
+                    e.printStackTrace();
+                }
+            }
+        });
+
+        addNewCost.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                try{
+                    hmsFunctions.gotoCosts();
                 }catch (Exception e){
                     e.printStackTrace();
                 }
