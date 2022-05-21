@@ -145,7 +145,12 @@ public class ReservationController implements Initializable {
     alert.setTitle("Error discount");
     alert.setContentText("Please the check in and check out fields can't be empty  ");
     alert.show();
-   }else {
+   } else if (!primaryPriceTf.getText().matches("[0-9]{1,13}(\\\\.[0-9]*)?")) {
+    Alert alert = new Alert(Alert.AlertType.ERROR);
+    alert.setTitle("Error discount");
+    alert.setContentText("Please the room/apartment fields can't be empty  ");
+    alert.show();
+   } else {
     if (t1.matches("[0-9]{1,13}(\\\\.[0-9]*)?")) {
      int days = checkOutDc.getValue().getDayOfYear() - checkInDc.getValue().getDayOfYear();
      double price = Double.parseDouble(calculateTotalPrice(primaryPriceTf.getText(), t1, days));

@@ -1,3 +1,10 @@
 Manifest-Version: 1.0
 Main-Class: com.hms.hmsfx.Main
+Class-Path: javafx-controls-17.0.1.jar tilesfx-11.48.jar bootstrapfx-cor
+ e-0.4.0.jar controlsfx-11.1.0.jar ikonli-core-12.2.0.jar mysql-connecto
+ r-java-8.0.29.jar javafx-base-17.0.1.jar javafx-media-17.0.1.jar javafx
+ -swt.jar javafx.web.jar javafx.base.jar javafx.fxml.jar javafx.media.ja
+ r javafx.swing.jar javafx.controls.jar javafx.graphics.jar javafx-graph
+ ics-17.0.1.jar validatorfx-0.1.13.jar formsfx-core-11.3.2.jar javafx-fx
+ ml-17.0.1.jar javafx-web-17.0.1.jar ikonli-javafx-12.2.0.jar
 
