@@ -1,0 +1,143 @@
+create table costbill
+(
+    id    int auto_increment
+        primary key,
+    title char(50) null
+);
+
+create table costs
+(
+    id           int auto_increment
+        primary key,
+    title        char(50)    null,
+    type         char(50)    null,
+    costInEu     double      null,
+    created_by   int         null,
+    date         varchar(10) null,
+    cost_bill_fk int         null,
+    constraint costs_ibfk_2
+        foreign key (cost_bill_fk) references costbill (id)
+);
+
+create index cost_bill_fk
+    on costs (cost_bill_fk);
+
+create index created_by
+    on costs (created_by);
+
+create table user
+(
+    id       int auto_increment
+        primary key,
+    username varchar(40) null,
+    password varchar(40) null,
+    Name     varchar(20) null,
+    BDate    varchar(20) null
+);
+
+create table apartments
+(
+    id          int auto_increment
+        primary key,
+    name        char(50)    null,
+    description varchar(50) null,
+    price       int         null,
+    type        char(50)    null,
+    status      tinyint(1)  null,
+    specs       varchar(60) null,
+    created_by  int         null,
+    constraint apartments_ibfk_1
+        foreign key (created_by) references user (id)
+);
+
+create index created_by
+    on apartments (created_by);
+
+create table beach
+(
+    id          int auto_increment
+        primary key,
+    name        varchar(20) null,
+    date        varchar(10) null,
+    total_price double      null,
+    created_by  int         null,
+    constraint beach_ibfk_1
+        foreign key (created_by) references user (id)
+);
+
+create index created_by
+    on beach (created_by);
+
+create table rooms
+(
+    id          int auto_increment
+        primary key,
+    name        char(50)    null,
+    description varchar(50) null,
+    price       int         null,
+    type        char(50)    null,
+    status      tinyint(1)  null,
+    created_by  int         null,
+    constraint rooms_ibfk_1
+        foreign key (created_by) references user (id)
+);
+
+create table booking
+(
+    id            int auto_increment
+        primary key,
+    type          char(30)      null,
+    room_fk       int           null,
+    apartment_fk  int           null,
+    check_in      char(20)      null,
+    check_out     char(20)      null,
+    totalPrice    double(10, 2) null,
+    created_by    int           null,
+    clientName    varchar(30)   not null,
+    clientSurname varchar(30)   not null,
+    clientId      varchar(30)   null,
+    clientPhone   varchar(20)   null,
+    dicount       double(10, 2) null,
+    primaryPrice  double(10, 2) null,
+    reference     varchar(30)   null,
+    constraint booking_ibfk_1
+        foreign key (created_by) references user (id),
+    constraint booking_ibfk_2
+        foreign key (room_fk) references rooms (id),
+    constraint booking_ibfk_3
+        foreign key (apartment_fk) references apartments (id)
+);
+
+create table bills
+(
+    id          int auto_increment
+        primary key,
+    title       char(30) null,
+    date        char(30) null,
+    reservation int      null,
+    created_by  int      null,
+    total_price int      null,
+    constraint bills_ibfk_1
+        foreign key (reservation) references booking (id),
+    constraint bills_ibfk_2
+        foreign key (created_by) references user (id)
+);
+
+create index created_by
+    on bills (created_by);
+
+create index reservation
+    on bills (reservation);
+
+create index apartment_fk
+    on booking (apartment_fk);
+
+create index created_by
+    on booking (created_by);
+
+create index room_fk
+    on booking (room_fk);
+
+create index created_by
+    on rooms (created_by);
+
